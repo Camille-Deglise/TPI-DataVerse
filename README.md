@@ -2,7 +2,7 @@
 Site web d'analyse et d'explorations de données météorologiques
 
 Dans le cadre du projet de Travail Pratique Informatique de la fin de formation,
-Il a été demandé de mettre en oeuvre un site web permettant l'affichage, le chargement 
+il a été demandé de mettre en oeuvre un site web permettant l'affichage, le chargement 
 et l'analyse de données météorologiques. 
 
 Il y a 3 types d'utilisateurs différents 
