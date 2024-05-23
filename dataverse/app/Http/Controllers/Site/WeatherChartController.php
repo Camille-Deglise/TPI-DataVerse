@@ -23,6 +23,7 @@ class WeatherChartController extends Controller
      */
     private function getAvailableWeatherDatas($locationId)
     {
+        //dd($locationId);
         //Tableau contenant toutes les donneés météos
         $weatherdatas = ['precipitation', 'sunshine', 'snow', 'temperature', 'humidity', 'wind' ];
         
@@ -34,13 +35,11 @@ class WeatherChartController extends Controller
             $count = WeatherData::where('location_id', $locationId)
                         ->whereNotNull($data)
                         ->count();
-            if($count >= 3)
-            {
-                $availableDatas[] = $data;
-            }
-            
+
+            $availableDatas[$data] = $count;
+
         }
-        
+        //dd($availableDatas);
         return $availableDatas;
     }
 
@@ -50,47 +49,39 @@ class WeatherChartController extends Controller
      * Retourne un graphique
      */
     public function randomWeatherChart($location)
-    {   
-        
-        //S'il n'y a pas de localisation disponible
-        if(!$location)
-        {
+    {
+        // Vérifier si une localisation a été fournie
+        if (!$location) {
             return new NoChartData('Pas de localisation disponible');
         }
-
-        //Déterminer les données disponibles dans cette localité
-        $availablesDatas = $this->getAvailableWeatherDatas($location->id);
-        
-        //S'il n'y pas de données valables 
-        if(empty($availablesDatas))
-        {
+    
+        // Déterminer les données météorologiques disponibles pour cette localisation
+        $availableDatas = $this->getAvailableWeatherDatas($location->id);
+    
+        // Vérifier si des données météorologiques sont disponibles
+        if (empty($availableDatas)) {
             return new NoChartData('Pas de données météos disponible');
         }
-
-        //Effectuer un random pour quelle donnée sera sur le graphique
-        $randomData = $availablesDatas[array_rand($availablesDatas)];
-
-        //Obtenir le mois actuel et reprendre une date aléatoire 
-        $currentMonth = Carbon::now()->month();
-        $randomYear = Carbon::now()->year() - rand(0,10);
-        $randomDate = Carbon::create($randomYear, $currentMonth, 1)->startOfMonth();
-
-        //Reprendre les données de la date aléatoire générée avant
-        $weatherData = WeatherData::where('location_id', $location->id)
-            ->whereBetween('statement_date', $randomDate)
-            ->orderBy('statement_date', 'asc')
-            ->get();
-
+    
+        // Sélectionner aléatoirement le type de données météorologiques à afficher
+        $randomData = $availableDatas[array_rand($availableDatas)];
+    
+        // Reprendre les données météorologiques pour une date aléatoire
+        $randomWeatherData = WeatherData::where('location_id', $location->id)
+            ->inRandomOrder() // Choisir aléatoirement un enregistrement
+            ->first();
+    
+        // Vérifier si des données météorologiques ont été trouvées
+        if (!$randomWeatherData) {
+            return new NoChartData('Pas de données météorologiques disponible pour cette localisation');
+        }
+    
+        // Créer le graphique avec les données sélectionnées
         $randomChart = new WeatherChart;
-        
-        $dateChart = $randomDate;
-        $dataChart = $weatherData;
-
-        $randomChart->labels($dateChart);
-        $randomChart->dataset(ucfirst($randomData), 'line', $dataChart)->backgroudColor('rgb(58, 129, 139)');
-
+        $randomChart->labels([$randomWeatherData->statement_date]);
+        $randomChart->dataset(ucfirst($randomData), 'bar', [$randomWeatherData->$randomData])->backgroundColor('rgb(58, 129, 139)');
+    
         return $randomChart;
-
     }
 
     /**

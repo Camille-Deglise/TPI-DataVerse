@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\PasswordReset;
+use App\Http\Controllers\Site\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +59,7 @@ Route::delete('/logout', [LoginController::class,'logout'])
 /*Route pour la vue de réinitialisation du mot de passe */
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
-})->middleware('guest')->name('password.request');
+    })->middleware('guest')->name('password.request');
 
 
  /*Route qui envoie l'email de réinitialisation COPIE site de LARAVEL */
@@ -72,13 +73,13 @@ Route::post('/forgot-password', function (Request $request) {
     return $status === Password::RESET_LINK_SENT
                 ? back()->with(['status' => __($status)])
                 : back()->withErrors(['email' => __($status)]);
-})->middleware('guest')->name('password.email');
+    })->middleware('guest')->name('password.email');
 
 
 /*Route pour le formulaire de reset du mot de passe */
 Route::get('/reset-password/{token}', function (string $token) {
     return view('auth.reset-password', ['token' => $token]);
-})->middleware('guest')->name('password.reset');
+    })->middleware('guest')->name('password.reset');
 
 /*Route qui modifie le mot de passe dans la base de donnée COPIE SITE DE LARAVEL */
 Route::post('/reset-password', function (Request $request) {
@@ -99,9 +100,17 @@ Route::post('/reset-password', function (Request $request) {
  
             event(new PasswordReset($user));
         }
-    );
- 
+    ); 
     return $status === Password::PASSWORD_RESET
                 ? redirect()->route('login')->with('status', __($status))
                 : back()->withErrors(['email' => [__($status)]]);
-})->middleware('guest')->name('password.update');
+    })->middleware('guest')->name('password.update');
+
+
+/*--------------------------Routes pour le home de l'utilisateur authentifié------------------ */
+Route::get('/home-auth/{user}', [HomeController::class, 'home_auth'])->name('home-auth');
+
+/*--------------------------Routes pour les modifications de l'utilisateur------------------ */
+Route::get('/setting', [SettingController::class, 'edit'])->name('setting.edit');
+Route::put('/setting/{user}', [SettingController::class, 'update'])->name('setting.update');
+Route::post('/setting/{user}', [SettingController::class, 'updpwd'])->name('setting.updpwd');

@@ -45,7 +45,7 @@ class LoginController extends Controller
             if($user->email_verified_at != null) {
                 // Utilisateur authentifié avec succès
                 $request->session()->regenerate();
-                return redirect()->route('home')->with('success', 'Vous êtes connecté avec succès.');
+                return redirect()->route('home-auth', $user->id)->with('success', 'Vous êtes connecté avec succès.');
             } else {
                 // Email non vérifié
                 Auth::logout();

@@ -25,6 +25,20 @@ class HomeController extends Controller
         $randomChartData = $weatherChartController->randomWeatherChart($location);
         
             return view('site.home', ['randomChartData' => $randomChartData]);
-        
+        // Vérifier si l'utilisateur est authentifié
+        if (auth()->check())
+        {
+            $user = auth()->user();
+            return view('site.home-auth',
+            [
+                'user' => $user
+            ]);
+        }
+    }
+
+    public function home_auth()
+    {
+
+        return view('site.home-auth');
     }
 }

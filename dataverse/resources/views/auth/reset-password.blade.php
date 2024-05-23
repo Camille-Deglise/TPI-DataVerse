@@ -38,7 +38,6 @@
                     </button>
                 </div>
             </div>
-            
         </form>
 @endguest
 @endsection
