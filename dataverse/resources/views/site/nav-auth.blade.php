@@ -4,7 +4,8 @@
 @auth
 
     <div class="flex space-x-4 items-center">
-        
+        <a href="{{route('home')}}"class="text-gray-300 hover:bg-cyan-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Accueil</a>
+        <a href="#"class="text-gray-300 hover:bg-cyan-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Gérer mon profil</a>
         {{-- <div class="flex space-x-4"> 
             <a href="{{ route('patient.create') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Ajouter patient</a>
             <a href="{{route ('addDatas')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-xs font-medium">Ajouts supplémentaires</a>

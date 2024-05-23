@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('name', 163);
-            $table->string('zipcode', 10);
+            $table->string('zipcode', 10)->nullable();
             $table->timestamps();
         });
     }
