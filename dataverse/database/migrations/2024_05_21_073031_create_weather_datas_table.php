@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('wind', total:4, places: 1)->nullable();
             $table->date('statement_date');
             $table->timestamp('imported_at');
-            $table->foreignIdFor(User::class)->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             
         });
     }

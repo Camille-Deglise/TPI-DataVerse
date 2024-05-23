@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Location;
+use App\Models\WeatherData;
 use Illuminate\Http\Request;
+use Nette\Utils\Random;
+use App\Charts\NoChartData;
 
 class HomeController extends Controller
 {
@@ -13,10 +17,14 @@ class HomeController extends Controller
      */
     public function home()
     {
-        //Graphique aléatoire
-        //.......
-
         
-        return view('site.home');
+        //Création d'un graphique aléatoire
+        $location = Location::inRandomOrder()->first();
+        $weatherChartController = new WeatherChartController();
+
+        $randomChartData = $weatherChartController->randomWeatherChart($location);
+        
+            return view('site.home', ['randomChartData' => $randomChartData]);
+        
     }
 }

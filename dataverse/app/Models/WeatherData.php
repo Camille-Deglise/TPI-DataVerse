@@ -9,6 +9,8 @@ class WeatherData extends Model
 {
     use HasFactory;
 
+    protected $table = 'weather_datas';
+
     /** 
     * Attributs assignables dans la base de données
     *
