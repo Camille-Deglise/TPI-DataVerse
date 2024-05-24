@@ -4,6 +4,15 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+//------------------------------
+// ETML - TPI
+// Auteur : Camille Déglise
+// Date : 21.05.2024
+// Modification :  
+//-------------------------------
+
+
+
 /**
  * Classe de type FormRequest
  * Contient les méthodes gérant la validation des données

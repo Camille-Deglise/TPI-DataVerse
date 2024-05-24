@@ -4,6 +4,15 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+//------------------------------
+// ETML - TPI
+// Auteur : Camille Déglise
+// Date : 21.05.2024
+// Modification :  v2_23.05.2024
+//-------------------------------
+
+
+
 class SettingRequest extends FormRequest
 {
     /**
@@ -25,8 +34,8 @@ class SettingRequest extends FormRequest
             'lastname' => ['required', 'string', 'regex:/^[-a-zA-ZÀ-ÿ]+$/'],
             'firstname' => ['required', 'string', 'regex:/^[-a-zA-ZÀ-ÿ]+$/'],
             'email'=> ['required','email'], 
-            'password' =>[ 'confirmed', 'min:14'],
-            'password_confirmation' => []
+            'password' =>['confirmed', 'min:14'],
+            'password_confirmation' => ['']
         ];
     }
 }

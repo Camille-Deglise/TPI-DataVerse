@@ -9,6 +9,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+
+
+//------------------------------
+// ETML - TPI
+// Auteur : Camille Déglise
+// Date : 21.05.2024
+// Description : Modèle pour les utilisateurs
+// Modification :  
+//-------------------------------
+
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;

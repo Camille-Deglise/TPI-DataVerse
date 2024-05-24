@@ -1,4 +1,4 @@
-@extends('base')
+@extends('site.base')
 @section('title', 'S\'inscrire')
 
 @section('page-title', 'Inscription')

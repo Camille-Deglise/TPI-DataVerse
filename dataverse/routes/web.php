@@ -37,14 +37,14 @@ Route::get('/register',  [RegisterController::class, 'registerForm']) ->name('re
 Route::post('/register', [RegisterController::class,'storeDB']);
 /*-----------------------------------------------------------------------------*/
 
-/*Route qui envoie l'email de vérification COPIE SITE de LARAVAEL*/
+/*Route qui envoie l'email de vérification COPIE DOC LARAVAEL*/
 Route::post('/email/verification-notification', function (Request $request)
 {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');
 })->middleware('auth')->name('verification.send');
 
-/* Route qui vérifie si l'email est validé */
+/* Route qui vérifie si l'email est validé COPIE DOC LARAVEL */
 Route::get('/email/verify({id}/{hash}', [VerificationController::class,'verify'])
 ->middleware('signed')->name('verification.verify');
 
@@ -56,13 +56,13 @@ Route::delete('/logout', [LoginController::class,'logout'])
 ->middleware('auth')
 ->name('logout');
 
-/*Route pour la vue de réinitialisation du mot de passe */
+/*Route pour la vue de réinitialisation du mot de passe COPIE DOC LARAVEL*/
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
     })->middleware('guest')->name('password.request');
 
 
- /*Route qui envoie l'email de réinitialisation COPIE site de LARAVEL */
+ /*Route qui envoie l'email de réinitialisation COPIE DOC LARAVEL */
 Route::post('/forgot-password', function (Request $request) {
     $request->validate(['email' => 'required|email']);
  
@@ -76,12 +76,12 @@ Route::post('/forgot-password', function (Request $request) {
     })->middleware('guest')->name('password.email');
 
 
-/*Route pour le formulaire de reset du mot de passe */
+/*Route pour le formulaire de reset du mot de passe COPIE DOC LARAVEL */
 Route::get('/reset-password/{token}', function (string $token) {
     return view('auth.reset-password', ['token' => $token]);
     })->middleware('guest')->name('password.reset');
 
-/*Route qui modifie le mot de passe dans la base de donnée COPIE SITE DE LARAVEL */
+/*Route qui modifie le mot de passe dans la base de donnée COPIE DOC LARAVEL */
 Route::post('/reset-password', function (Request $request) {
     $request->validate([
         'token' => 'required',

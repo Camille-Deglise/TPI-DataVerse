@@ -13,5 +13,5 @@
             </div>
         @endguest
     </div>
-    @include('site.nav-auth')
+    @include('shared.nav-auth')
 </div>

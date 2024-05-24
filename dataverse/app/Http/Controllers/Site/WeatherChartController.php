@@ -10,6 +10,16 @@ use App\Models\Location;
 use App\Models\WeatherData;
 use Illuminate\Http\Request;
 
+
+//------------------------------
+// ETML - TPI
+// Auteur : Camille Déglise
+// Date : 21.05.2024
+// Modification :  v2_23.05.2024
+//-------------------------------
+
+
+
 /**
  * Controller pour les graphiques des données 
  * Contient les méthodes de création des graphiques
@@ -23,7 +33,7 @@ class WeatherChartController extends Controller
      */
     private function getAvailableWeatherDatas($locationId)
     {
-        //dd($locationId);
+        
         //Tableau contenant toutes les donneés météos
         $weatherdatas = ['precipitation', 'sunshine', 'snow', 'temperature', 'humidity', 'wind' ];
         
@@ -39,7 +49,7 @@ class WeatherChartController extends Controller
             $availableDatas[$data] = $count;
 
         }
-        //dd($availableDatas);
+        
         return $availableDatas;
     }
 
@@ -101,7 +111,6 @@ class WeatherChartController extends Controller
         {
             return new NoChartData("Il manque des données pour générer un graphique");
         }
-        
         
         $precipChart = new WeatherChart;
 

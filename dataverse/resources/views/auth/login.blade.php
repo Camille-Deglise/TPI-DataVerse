@@ -1,4 +1,4 @@
-@extends('base')
+@extends('site.base')
 @section('title', 'Connexion')
 @section('page-title', 'Connexion')
 @section('content')

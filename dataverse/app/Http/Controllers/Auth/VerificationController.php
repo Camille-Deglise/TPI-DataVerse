@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
 use App\Models\User;
 
+//------------------------------
+// ETML - TPI
+// Auteur : Camille Déglise
+// Date : 21.05.2024
+// Modification : 
+//-------------------------------
+
+
+
+
 /**
  * Classe de type Controller 
  * Contient les méthodes de vérification de l'utilisateur 

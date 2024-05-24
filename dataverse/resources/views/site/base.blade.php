@@ -14,7 +14,7 @@
     <div class="wrapper ">
         <!--Navigation -->
         <nav class="bg-cyan-800 p-6">
-           @include('site.navbar')
+           @include('shared.navbar')
         </nav>
 
         <!--Contenu -->
@@ -23,7 +23,7 @@
         </div>
         
         <div class="content container mx-auto px-2 py-2">
-            @include('site.errors-user')
+            @include('shared.errors-user')
     
             @yield('content')
         </div>

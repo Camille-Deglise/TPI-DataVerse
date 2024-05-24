@@ -1,4 +1,4 @@
-@extends('base')
+@extends('site.base')
 @section('title', 'Mot de passe oublié')
 @section('page-title', 'Réinitialisation du mot de passe')
 @section('content')

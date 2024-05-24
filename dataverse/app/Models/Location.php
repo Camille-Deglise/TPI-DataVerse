@@ -5,6 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+//------------------------------
+// ETML - TPI
+// Auteur : Camille Déglise
+// Date : 21.05.2024
+// Description : Modèle pour les lieux
+// Modification :  
+//-------------------------------
+
+
+
+
+
 class Location extends Model
 {
     use HasFactory;

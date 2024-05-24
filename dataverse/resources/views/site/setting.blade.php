@@ -1,4 +1,4 @@
-@extends('base')
+@extends('site.base')
 @section('title', 'Mon profil')
 @section('page-title', 'Modifier mon profil')
 @section('content')

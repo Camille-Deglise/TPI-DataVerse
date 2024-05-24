@@ -5,6 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
+
+//------------------------------
+// ETML - TPI
+// Auteur : Camille Déglise
+// Date : 21.05.2024
+// Description : Modèle pour les données météorologiques
+// Modification :  
+//-------------------------------
 class WeatherData extends Model
 {
     use HasFactory;
@@ -23,6 +32,7 @@ class WeatherData extends Model
         'temperature',
         'humidity',
         'wind',
+        'statement_date',
         'imported_at',
         'user_id',
         'location_id'

@@ -9,6 +9,15 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
+//------------------------------
+// ETML - TPI
+// Auteur : Camille Déglise
+// Date : 21.05.2024
+// Modification : 
+//-------------------------------
+
+
+
 /**
  * Classe de type Controller 
  * Contient toutes les méthodes gérant l'enregistrement d'un utilisateur

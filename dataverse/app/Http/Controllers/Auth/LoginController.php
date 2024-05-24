@@ -8,6 +8,19 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+//------------------------------
+// ETML - TPI
+// Auteur : Camille Déglise
+// Date : 21.05.2024
+// Modification : 
+//-------------------------------
+
+
+
+/**
+ * Classe de type Controller
+ * Gère les méthodes en lien avec la connexion
+ */
 class LoginController extends Controller
 {
     /**
