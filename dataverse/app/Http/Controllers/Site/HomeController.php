@@ -28,53 +28,69 @@ class HomeController extends Controller
      * Retourne la vue de la vue home de base du site 
      * Ne tient pas compte de si l'utilisateur est connecté ou non
      */
-    public function home()
+    public function home(Request $request)
     {
-
+        if ($request->has('search')) {
+            return $this->search($request);
+        }
         //Création d'un graphique aléatoire
         $location = Location::inRandomOrder()->first();
         $weatherChartController = new WeatherChartController();
 
         $randomChartData = $weatherChartController->randomWeatherChart($location);
         
-            return view('site.home', ['randomChartData' => $randomChartData]);
-        // Vérifier si l'utilisateur est authentifié
-        if (auth()->check())
-        {
-            $user = auth()->user();
-            return view('site.home-auth',
-            [
-                'user' => $user
-            ]);
-        }
+        return view('site.home', [
+            'randomChartData' => $randomChartData,
+            'search' => '',  // Ajout de 'search' vide
+            'locations' => collect()  // Ajout de 'locations' vide
+        ]);
     }
+    
 
     /**
      * Méthode d'affichage de la vue "home" si l'utilisateur est authentifié
      * Retourne une vue
      */
-    public function home_auth()
+    public function home_auth(Request $request)
     {
-
-        return view('site.home-auth');
+        if ($request->has('search')) {
+            return $this->search($request);
+        }
+        return view('site.home-auth', [
+            'search' => '',  // Ajout de 'search' vide
+        ]);
     }
 
 
     /**
-     * Méthode pour la barre de recherche
+     * Méthode privée pour la barre de recherche
      * 
      */
-    public function search()
+    private function search(Request $request)
     {
-        //Vérifier s'il y a une recherche
-        if(request()->has('search'))
-        {
+        // Query builder
+        $locations = Location::query();
 
-        }
-        //Si oui, check dans la base de donnée
+        // Vérifier s'il y a une recherche
+        if ($search = $request->search) {
+            // Recherche exacte sur le nom
+            $exactLocation = $locations->where('name', $search)
+                                    ->orWhere('zipcode', $search)
+                                    ->first();
 
-            //Si ok --> envoi sur la page combinaison
-            //Sinon --> message d'erreur et liste des lieux existants, renvoi sur la page d'accueil 
-        
+            if ($exactLocation) {
+                // Si une correspondance exacte est trouvée, redirection vers la page de détails
+                return view('site.combi', ['location' => $exactLocation, 'search' => $search]);
+            } 
+            else {
+                // Sinon, recherche de lieux contenant la partie de texte entrée
+                $locationsContaining = $locations->where('name', 'LIKE', '%' . $search . '%')
+                                                ->orWhere('zipcode', 'LIKE', '%' . $search . '%')
+                                                ->get();
+
+                // Retourner la liste des lieux correspondants
+                return view('site.home-auth', ['locations' => $locationsContaining, 'search' => $search]);
+            }
+        } 
     }
 }
