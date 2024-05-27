@@ -6,6 +6,7 @@ use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Site\CombinaisonController;
 use Illuminate\Support\Facades\Password;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -31,7 +32,7 @@ use App\Http\Controllers\Site\SettingController;
 
 /*Route de la page home du site */
 Route::get('/home',  [HomeController::class, 'home'])->name('home');
-Route::get('/combi/{id}', [HomeController::class, 'combi'])->name('combi');
+
 
 
 /*Route pour la page d'inscription */
@@ -109,3 +110,7 @@ Route::post('/reset-password', function (Request $request) {
 Route::get('/setting', [SettingController::class, 'edit'])->name('setting.edit');
 Route::put('/setting/{user}', [SettingController::class, 'update'])->name('setting.update');
 Route::post('/setting/{user}', [SettingController::class, 'updpwd'])->name('setting.updpwd');
+
+/*--------------------------Routes pour les graphiques combinés------------------ */
+Route::get('/combi/{id}', [CombinaisonController::class, 'combi'])->name('combi');
+Route::post('/combinaison', [CombinaisonController::class, 'combinaisonChart'])->name('combinaison');

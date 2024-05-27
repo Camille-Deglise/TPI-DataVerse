@@ -25,6 +25,7 @@ class HomeController extends Controller
 {
     /**
      * Méthode d'affichage de la vue 
+     * @param Request  $request
      * Retourne la vue de la vue home selon la connexion de l'utilisateur
      */
     public function home(Request $request)
@@ -56,7 +57,9 @@ class HomeController extends Controller
     
     /**
      * Méthode privée pour la barre de recherche
-     * Requiert la recherche, la vue et le graphique aléatoire si c'est sur la vue principale
+     * @param Request $request
+     * @param $view
+     * @param $randomChartData  Nécessaire si la vue choisie est pour l'utilisateur non connecté
      * Retourne une vue qui est déterminée par la méthode home 
      */
     private function search(Request $request, $view, $randomChartData)
@@ -86,15 +89,5 @@ class HomeController extends Controller
             'exactLocation' => $exactLocation,
         ]);
     }
-
-    public function combi($id, Request $request)
-    {   
-        //Définir et retrouver l'id du lieu cliqué 
-        $location = Location::find($id);        
-
-        if($location)
-        {
-            return view('site.combi', ['location' => $location]);
-        }
-    }
+  
 }

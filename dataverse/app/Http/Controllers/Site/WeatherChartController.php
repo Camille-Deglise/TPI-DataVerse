@@ -98,7 +98,7 @@ class WeatherChartController extends Controller
      * Méthode publique de création de graphique pour les précipitations
      * Retourne un graphique
      */
-    public function precipitationChart($weatherdatas)
+    public function precipChart($weatherdatas)
     {   
         //Filtre les données récupérées si elles ne sont pas à null
         $weatherdatasFiltred = $weatherdatas->filter(function($weatherdatas)
@@ -126,4 +126,150 @@ class WeatherChartController extends Controller
 
         return $precipChart;
     }
+
+    public function sunshineChart($weatherdatas)
+    {   
+        //Filtre les données récupérées si elles ne sont pas à null
+        $weatherdatasFiltred = $weatherdatas->filter(function($weatherdatas)
+        {
+            return $weatherdatas -> data != null;
+        });
+
+        //S'il n' y a pas suffisamment de valeurs pour générer un graphique 
+        if($weatherdatasFiltred->pluck('sunshine')->count()<3)
+        {
+            return new NoChartData("Il manque des données pour générer un graphique");
+        }
+        
+        $sunChart = new WeatherChart;
+
+        //Axe X
+        $dates = $weatherdatasFiltred->pluck('statement_date');
+
+        //Axe Y
+        $sunshine = $weatherdatasFiltred->pluck('sunshine');
+
+        //Associations des axes 
+        $sunChart->labels($dates);
+        $sunChart->dataset('Ensoleillement', 'bar', $sunshine)->backgroudColor('rgb(239, 208, 35)');
+
+        return $sunChart;
+    }
+
+    public function snowChart($weatherdatas)
+    {   
+        //Filtre les données récupérées si elles ne sont pas à null
+        $weatherdatasFiltred = $weatherdatas->filter(function($weatherdatas)
+        {
+            return $weatherdatas -> data != null;
+        });
+
+        //S'il n' y a pas suffisamment de valeurs pour générer un graphique 
+        if($weatherdatasFiltred->pluck('snow')->count()<3)
+        {
+            return new NoChartData("Il manque des données pour générer un graphique");
+        }
+        
+        $snowChart = new WeatherChart;
+
+        //Axe X
+        $dates = $weatherdatasFiltred->pluck('statement_date');
+
+        //Axe Y
+        $snow = $weatherdatasFiltred->pluck('snow');
+
+        //Associations des axes 
+        $snowChart->labels($dates);
+        $snowChart->dataset('Ensoleillement', 'bar', $snow)->backgroudColor('rgb(176, 203, 201)');
+
+        return $snowChart;
+    }
+
+    public function windChart($weatherdatas)
+    {   
+        //Filtre les données récupérées si elles ne sont pas à null
+        $weatherdatasFiltred = $weatherdatas->filter(function($weatherdatas)
+        {
+            return $weatherdatas -> data != null;
+        });
+
+        //S'il n' y a pas suffisamment de valeurs pour générer un graphique 
+        if($weatherdatasFiltred->pluck('wind')->count()<3)
+        {
+            return new NoChartData("Il manque des données pour générer un graphique");
+        }
+        
+        $windChart = new WeatherChart;
+
+        //Axe X
+        $dates = $weatherdatasFiltred->pluck('statement_date');
+
+        //Axe Y
+        $wind = $weatherdatasFiltred->pluck('wind');
+
+        //Associations des axes 
+        $windChart->labels($dates);
+        $windChart->dataset('Ensoleillement', 'bar', $wind)->backgroudColor('rgb(167, 214, 182)');
+
+        return $windChart;
+    }
+
+    public function tempChart($weatherdatas)
+    {   
+        //Filtre les données récupérées si elles ne sont pas à null
+        $weatherdatasFiltred = $weatherdatas->filter(function($weatherdatas)
+        {
+            return $weatherdatas -> data != null;
+        });
+
+        //S'il n' y a pas suffisamment de valeurs pour générer un graphique 
+        if($weatherdatasFiltred->pluck('temperature')->count()<3)
+        {
+            return new NoChartData("Il manque des données pour générer un graphique");
+        }
+        
+        $tempChart = new WeatherChart;
+
+        //Axe X
+        $dates = $weatherdatasFiltred->pluck('statement_date');
+
+        //Axe Y
+        $temperatures = $weatherdatasFiltred->pluck('temperature');
+
+        //Associations des axes 
+        $tempChart->labels($dates);
+        $tempChart->dataset('Ensoleillement', 'bar', $temperatures)->backgroudColor('rgb(243, 165, 67 )');
+
+        return $tempChart;
+    }
+
+    public function humiChart($weatherdatas)
+    {   
+        //Filtre les données récupérées si elles ne sont pas à null
+        $weatherdatasFiltred = $weatherdatas->filter(function($weatherdatas)
+        {
+            return $weatherdatas -> data != null;
+        });
+
+        //S'il n' y a pas suffisamment de valeurs pour générer un graphique 
+        if($weatherdatasFiltred->pluck('humidity')->count()<3)
+        {
+            return new NoChartData("Il manque des données pour générer un graphique");
+        }
+        
+        $humiChart = new WeatherChart;
+
+        //Axe X
+        $dates = $weatherdatasFiltred->pluck('statement_date');
+
+        //Axe Y
+        $humidity = $weatherdatasFiltred->pluck('humidity');
+
+        //Associations des axes 
+        $humiChart->labels($dates);
+        $humiChart->dataset('Ensoleillement', 'bar', $humidity)->backgroudColor('rgb(95, 113, 231)');
+
+        return $humiChart;
+    }
+
 }

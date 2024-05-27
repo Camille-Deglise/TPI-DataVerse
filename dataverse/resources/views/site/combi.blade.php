@@ -8,7 +8,15 @@
 @if (!empty($location))
     <h1>{{ $location->name }}</h1>
 
-    <p>Choisissez une catégorie</p>
+@else
+    @include('shared.no-result-search')
+@endif
+
+<p>Graphique</p> 
+
+<form action="{{route('combinaison')}}" method="POST">
+    @csrf
+<p>Choisissez une catégorie</p>
     <label for="precipitations">Précipitations</label> <input type="radio" name="category" value="precipitations">
     <label for="sunshine">Ensoleillement</label> <input type="radio" name="category" value="sunshine">
     <label for="snow">Neige</label> <input type="radio" name="category" value="snow">
@@ -16,14 +24,13 @@
     <label for="temperature">Température</label> <input type="radio" name="category" value="temperature">
     <label for="humidity">Humidité</label> <input type="radio" name="category" value="humidity">
 
-    <p>Choisir des dates</p>
-    <label for="date_begin">Date de début</label><input type="date" name="date_begin">
-    <label for="date_end">Date de fin</label><input type="date" name="date_end">
+<p>Choisir des dates</p>
+    <label for="begin_date">Date de début :</label>
+    <input type="date" name="begin_date">
+    <label for="end_date">Date de fin :</label>
+    <input type="date" name="end_date">
 
-    <p>Graphique</p> 
-
-@else
-    @include('shared.no-result-search')
-@endif
+    <button type="submit">Créer</button>
+</form>
 
 @endsection
