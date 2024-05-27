@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Site;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PwdSettingRequest;
 use App\Http\Requests\SettingRequest;
 use Illuminate\Http\Request;
 
@@ -61,7 +62,7 @@ class SettingController extends Controller
      * Méthode pour modifier le mot de passe de l'utilisateur dans la base de données
      * Retourne une redirection avec un message de succès
      */
-    public function updpwd(SettingRequest $request, User $user)
+    public function updpwd(PwdSettingRequest $request, User $user)
     {
         $user = User::findOrFail($request->user_id);
 

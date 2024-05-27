@@ -113,4 +113,4 @@ Route::post('/setting/{user}', [SettingController::class, 'updpwd'])->name('sett
 
 /*--------------------------Routes pour les graphiques combinés------------------ */
 Route::get('/combi/{id}', [CombinaisonController::class, 'combi'])->name('combi');
-Route::post('/combinaison', [CombinaisonController::class, 'combinaisonChart'])->name('combinaison');
+Route::post('/combinaison/{id}', [CombinaisonController::class, 'combinaisonChart'])->name('combinaison');
