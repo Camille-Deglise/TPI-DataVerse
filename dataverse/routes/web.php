@@ -31,6 +31,8 @@ use App\Http\Controllers\Site\SettingController;
 
 /*Route de la page home du site */
 Route::get('/home',  [HomeController::class, 'home'])->name('home');
+Route::get('/combi/{id}', [HomeController::class, 'combi'])->name('combi');
+
 
 /*Route pour la page d'inscription */
 Route::get('/register',  [RegisterController::class, 'registerForm']) ->name('register');
@@ -65,11 +67,9 @@ Route::get('/forgot-password', function () {
  /*Route qui envoie l'email de réinitialisation COPIE DOC LARAVEL */
 Route::post('/forgot-password', function (Request $request) {
     $request->validate(['email' => 'required|email']);
- 
     $status = Password::sendResetLink(
         $request->only('email')
     );
- 
     return $status === Password::RESET_LINK_SENT
                 ? back()->with(['status' => __($status)])
                 : back()->withErrors(['email' => __($status)]);
@@ -88,16 +88,13 @@ Route::post('/reset-password', function (Request $request) {
         'email' => 'required|email',
         'password' => 'required|min:14|confirmed',
     ]);
- 
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
         function (User $user, string $password) {
             $user->forceFill([
                 'password' => Hash::make($password)
             ])->setRememberToken(Str::random(60));
- 
             $user->save();
- 
             event(new PasswordReset($user));
         }
     ); 
@@ -107,8 +104,6 @@ Route::post('/reset-password', function (Request $request) {
     })->middleware('guest')->name('password.update');
 
 
-/*--------------------------Routes pour le home de l'utilisateur authentifié------------------ */
-Route::get('/home-auth/{user}', [HomeController::class, 'home_auth'])->name('home-auth');
 
 /*--------------------------Routes pour les modifications de l'utilisateur------------------ */
 Route::get('/setting', [SettingController::class, 'edit'])->name('setting.edit');

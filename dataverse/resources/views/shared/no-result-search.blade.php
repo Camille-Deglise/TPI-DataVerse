@@ -1,14 +1,13 @@
-
 @if(!empty($search))
     <h2>Résultats pour "{{ $search }}"</h2>
-    <p>Aucun résultat trouvé.</p>
-@endif
 
-@if(!empty($locationsContaining))
-<p>Votre recherche se trouve peut-être dans cette liste</p>
-<ul>
-    @foreach($locationsContaining as $location)
-        <li>{{ $location->name }} ({{ $location->zipcode }})</li>
-    @endforeach
-</ul> 
+    @if($locations->isNotEmpty())
+        <ul>
+            @foreach($locations as $location)
+            <li><a href="{{ route('combi', ['id' => $location->id]) }}">{{ $location->name }}</a></li>
+            @endforeach
+        </ul>
+    @else
+        <p>Aucune ville correspondante trouvée.</p>
+    @endif
 @endif

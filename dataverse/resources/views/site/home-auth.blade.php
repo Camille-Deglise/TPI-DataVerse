@@ -5,8 +5,6 @@
 @section('content')
 
 @include('shared.search-bar')
-@if(!empty($search))
-    @include('shared.no-result-search')
-@endif
+@include('shared.no-result-search')
 
 @endsection

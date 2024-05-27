@@ -20,12 +20,7 @@
 </div>
 
 @include('shared.search-bar')
-@if(!empty($search))
-    @include('shared.no-result-search')
-@endif
-
-
-
+@include('shared.no-result-search')
 <div class="mt-8">
     <h2 class="text-gray-700 text-center text-xl">Graphique Aléatoire</h2>
 

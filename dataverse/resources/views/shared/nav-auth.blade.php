@@ -4,7 +4,7 @@
 @auth
 
     <div class="flex space-x-4 items-center">
-        <a href="{{route('home-auth', $user->id)}}"class="text-gray-300 hover:bg-cyan-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Accueil</a>
+        <a href="{{route('home', $user->id)}}"class="text-gray-300 hover:bg-cyan-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Accueil</a>
         <a href="{{route('setting.edit')}}"class="text-gray-300 hover:bg-cyan-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Gérer mon profil</a>
         
     </div>
