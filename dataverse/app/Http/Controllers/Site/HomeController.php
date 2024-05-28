@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Location;
+use Illuminate\Support\Facades\DB;
 use App\Models\WeatherData;
 use Illuminate\Http\Request;
 use Nette\Utils\Random;
@@ -30,6 +31,7 @@ class HomeController extends Controller
      */
     public function home(Request $request)
     {
+       
         //Vérification de l'authentification de l'utilisateur
         $userChecked = auth()->check();
         
@@ -50,7 +52,8 @@ class HomeController extends Controller
         return view($wichView, [
             'randomChartData' => $randomChartData,
             'search' => '',
-            'locations' => collect(),          //Collect reprend les lieux dans un tableau
+            'locations' => collect(),   //Collect reprend les lieux dans un tableau
+    
         ]);
     }
 

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ImportRequest;
 use Illuminate\Http\Request;
+use App\Models\Location;
+use App\Models\WeatherData;
 
 //------------------------------
 // ETML - TPI
@@ -21,12 +24,33 @@ class ImportController extends Controller
 {
     public function showForm()
     {
-        return view('site.import');
+        $locationsImport = Location::all();
+        //dd($locationsImport);
+        return view('site.import', ['locationsImport' => $locationsImport]);
     }
 
-
-    public function process(Request $request)
+    public function process(ImportRequest $request)
     {
+        // Récupérer les données du formulaire
+        $newLocationName = $request->input('newLocationName');
+        $newLocationZip = $request->input('newLocationZip');
+        $selectedLocationId = $request->input('locationImport');
+
+        // Si les champs pour le nouveau lieu sont remplis, créer un nouveau lieu dans la db
+        if ($newLocationName && $newLocationZip) {
+            $location = Location::create([
+                'name' => $newLocationName,
+                'zipcode' => $newLocationZip
+            ]);
+
+            // Récupérer l'ID du nouveau lieu créé
+            $selectedLocationId = $location->id;
+        }
+
+        //Récuperer id de l'utilisateur
+        $user = auth()->user();
+        $userId = $user->id;
+        
         $file = $request->file('csv_file');
 
         // Validez que le fichier a été téléchargé et est un fichier CSV
@@ -36,7 +60,6 @@ class ImportController extends Controller
 
             // Traitement des données CSV et insertion dans la base de données
             $rows = explode("\n", $contents);
-        
 
             // Ignorer la première ligne (en-têtes de colonnes)
             $dataRows = array_slice($rows, 1);
@@ -49,25 +72,27 @@ class ImportController extends Controller
                 {
                     $data = str_getcsv($row);
                    
-                    // Validez et transformez les données si nécessaire
+                    // Insérer directement dans la base de données
                  
-
-                    
-                    /// Récupérer le service associé à l'utilisateur
-                    
-                    // Insérez les données dans la base de données
-                   
-
-                    // Assurez-vous de gérer correctement les relations entre les modèles et la table pivot
-                   
+                    $newWData = WeatherData::create(
+                    [
+                        'precipitation' =>$data[0],
+                        'sunshine' =>$data[1],
+                        'snow' =>$data[2],
+                        'temperature'=> $data[3],
+                        'humidity' =>$data[4],
+                        'wind' =>$data[5],
+                        'statement_date' => $data[6],
+                        'user_id' =>$userId,
+                        'location_id' => $selectedLocationId
+                    ]);
+ 
                 }
-                return redirect()->route('home')->with('success', 'Importation réussie.');
+                return redirect()->route('import.showForm')->with('success', 'Importation réussie.');
             } else{
-                return redirect()->back()->with('error', 'Le fichier CSV est vide.');
-            }
-               
+                return redirect()->back()->withErrors('Le fichier CSV est vide.');
+            }   
         }
-
-        return redirect()->back()->with('error', 'Veuillez sélectionner un fichier CSV.');
+        return redirect()->back()->withErrors('Veuillez sélectionner un fichier de format CSV.');
     }
 }

@@ -50,7 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * Fonction protégée reliant la table user et la table weatherdata (fk)
      * Permet de récupérer les données météorologiques que l'utilisateur a importé
      */
-    protected function weather_datats()
+    protected function weather_datas()
     {
         return $this->hasMany(WeatherData::class);
     }

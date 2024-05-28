@@ -21,7 +21,8 @@ return new class extends Migration
             $table->decimal('humidity', total:4, places: 1)->nullable();
             $table->decimal('wind', total:4, places: 1)->nullable();
             $table->date('statement_date');
-            $table->timestamp('imported_at');
+            $table->timestamp('imported_at')->useCurrent();
+            $table->timestamps();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             
         });

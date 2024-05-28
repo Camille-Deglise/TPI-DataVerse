@@ -25,6 +25,7 @@ class Location extends Model
     * Attributs assignables dans la base de données
     *
     */
+    protected $table = 'locations';
     protected $fillable = 
     [
         'name',

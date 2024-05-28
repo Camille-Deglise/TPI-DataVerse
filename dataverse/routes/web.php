@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Controllers\Site\SettingController;
+use App\Http\Controllers\Site\ImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,7 +118,9 @@ Route::get('/combi/{id}', [CombinaisonController::class, 'combi'])->name('combi'
 Route::post('/combinaison/{id}', [CombinaisonController::class, 'combinaisonChart'])->name('combinaison');
 
 /*-------------------------------Routes pour les modifications de données------------------------- */
-Route::get('/settData/{id}', [SettDataController::class, 'edit'])->name('setting.dataEdit');
-
+Route::get('/settData', [SettDataController::class, 'showData'])->name('settData');
+Route::post('/showSummary/{id}', [SettDataController::class, 'showSummary'])->name('showSummary');
 
 /*-------------------------------Routes pour l'import de données----------------------------------- */
+Route::get('/import', [ImportController::class, 'showForm'])->name('import.showForm');
+Route::post('/import', [ImportController::class, 'process'])->name('import.process');
