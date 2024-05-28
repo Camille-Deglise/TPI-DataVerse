@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 // Auteur : Camille Déglise
 // Date : 21.05.2024
 // Description : Modèle pour les lieux
-// Modification :  
+// Modification :  selon commit de git
 //-------------------------------
 
 

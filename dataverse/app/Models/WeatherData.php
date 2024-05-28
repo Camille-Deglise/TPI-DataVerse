@@ -12,8 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 // Auteur : Camille Déglise
 // Date : 21.05.2024
 // Description : Modèle pour les données météorologiques
-// Modification :  
+// Modification :  selon commit de git
 //-------------------------------
+
+
+
 class WeatherData extends Model
 {
     use HasFactory;

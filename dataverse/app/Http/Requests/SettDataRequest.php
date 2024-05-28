@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 //------------------------------
 // ETML - TPI
 // Auteur : Camille Déglise
-// Date : 27.05.2024
+// Date : 28.05.2024
 // Modification :  selon commit de git
 //-------------------------------
 
@@ -15,14 +15,14 @@ use Illuminate\Foundation\Http\FormRequest;
  * Classe de type FormRequest
  * Contient les méthodes gérant la validation des données
 */
-class PwdSettingRequest extends FormRequest
+class SettDataRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -33,8 +33,7 @@ class PwdSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'password' =>['required','confirmed', 'min:14'],
-            'password_confirmation' => ['required']
+            //
         ];
     }
 }

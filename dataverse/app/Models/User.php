@@ -16,7 +16,7 @@ use Laravel\Sanctum\HasApiTokens;
 // Auteur : Camille Déglise
 // Date : 21.05.2024
 // Description : Modèle pour les utilisateurs
-// Modification :  
+// Modification :  selon commit de git
 //-------------------------------
 
 

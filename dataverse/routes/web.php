@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Site\CombinaisonController;
+use App\Http\Controllers\Site\SettDataController;
 use Illuminate\Support\Facades\Password;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -114,3 +115,9 @@ Route::post('/setting/{user}', [SettingController::class, 'updpwd'])->name('sett
 /*--------------------------Routes pour les graphiques combinés------------------ */
 Route::get('/combi/{id}', [CombinaisonController::class, 'combi'])->name('combi');
 Route::post('/combinaison/{id}', [CombinaisonController::class, 'combinaisonChart'])->name('combinaison');
+
+/*-------------------------------Routes pour les modifications de données------------------------- */
+Route::get('/settData/{id}', [SettDataController::class, 'edit'])->name('setting.dataEdit');
+
+
+/*-------------------------------Routes pour l'import de données----------------------------------- */
