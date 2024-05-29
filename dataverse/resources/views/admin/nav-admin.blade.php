@@ -1,11 +1,25 @@
 @php
     $user = Auth::user();
+    $user->is_admin;
+    $users = app\Models\User::all();
 @endphp
 @auth
 
     <div class="flex space-x-4 items-center">
         <a href="{{route('home', $user->id)}}"class="text-gray-300 hover:bg-cyan-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Accueil</a>
         <a href="{{route('setting.edit')}}"class="text-gray-300 hover:bg-cyan-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Gérer mon profil</a>
+        <div id="mes-suivis" class="relative ">
+            <a href="#" class="text-gray-300 hover:bg-cyan-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" >Gestion Contributeurs</a>
+                <div class=" absolute hidden bg-gray-500 rounded-md shadow-md">
+                    <ul>
+                        @foreach ($users as $user)
+                            <li>
+                                <a href="{{ route('user.setting', ['id' => $user->id]) }}" class="bg-gray text-black w-48 px-3 py-2 rounded-md text-sm font-medium flex items-center">{{$user->name}} {{$user->firstname}}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+        </div>
     </div>
 
     <div class="ml-auto flex items-center">
@@ -20,3 +34,4 @@
     </div>
 
 @endauth
+{{--  --}}

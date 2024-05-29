@@ -30,34 +30,35 @@ class HomeController extends Controller
      * Retourne la vue de la vue home selon la connexion de l'utilisateur
      */
     public function home(Request $request)
-    {
-       
-        //Vérification de l'authentification de l'utilisateur
-        $userChecked = auth()->check();
-        
-        //Choix de la vue s'il est connecté ou non
-        $wichView = $userChecked ? 'site.home-auth' : 'site.home';
+{
+    // Vérification de l'authentification de l'utilisateur
+    $userChecked = auth()->check();
+    $userAdmin = $userChecked ? auth()->user()->is_admin : false;
 
-        // Création d'un graphique aléatoire
-        $location = Location::inRandomOrder()->first();
-        $weatherChartController = new WeatherChartController();
-        $randomChartData = $weatherChartController->randomWeatherChart($location);
-
-
-        //Vérification de s'il y a une requête de type recherche
-        if ($request->has('search')) {
-            return $this->search($request, $wichView, $randomChartData);
-        }
-
-        return view($wichView, [
-            'randomChartData' => $randomChartData,
-            'search' => '',
-            'locations' => collect(),   //Collect reprend les lieux dans un tableau
-    
-        ]);
+    // Choix de la vue s'il est connecté ou non
+    if ($userChecked && $userAdmin) {
+        $whichView = 'admin.home-admin';
+    } else {
+        $whichView = $userChecked ? 'site.home-auth' : 'site.home';
     }
 
-    
+    // Création d'un graphique aléatoire
+    $location = Location::inRandomOrder()->first();
+    $weatherChartController = new WeatherChartController();
+    $randomChartData = $weatherChartController->randomWeatherChart($location);
+
+    // Vérification s'il y a une requête de type recherche
+    if ($request->has('search')) {
+        return $this->search($request, $whichView, $randomChartData);
+    }
+
+    return view($whichView, [
+        'randomChartData' => $randomChartData,
+        'search' => '',
+        'locations' => collect(),   // Collect reprend les lieux dans un tableau
+    ]);
+}
+
     /**
      * Méthode privée pour la barre de recherche
      * @param Request $request

@@ -45,7 +45,21 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->firstname . ' ' . $this->lastname;
     }    
+    /**
+     * Fonction de récupération si l'utilisateur est administrateur
+     */
+    public function is_admin()
+    {
+        return $this->is_admin;
+    }
 
+    /**
+     * Fonction de récupération de l'utilisateur s'il est inactif
+     */
+    public function is_activ()
+    {
+        return $this->is_activ;
+    }
     /**
      * Fonction protégée reliant la table user et la table weatherdata (fk)
      * Permet de récupérer les données météorologiques que l'utilisateur a importé

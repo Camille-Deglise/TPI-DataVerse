@@ -13,5 +13,15 @@
             </div>
         @endguest
     </div>
-    @include('shared.nav-auth')
+    @auth
+    @php
+    $user = Auth::user();
+    @endphp
+    @if ($user->is_admin)
+        @include('admin.nav-admin')      
+    @else  
+        @include('shared.nav-auth')
+    @endif
+    @endauth
+    
 </div>

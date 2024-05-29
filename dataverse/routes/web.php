@@ -6,6 +6,7 @@ use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Site\AdminController;
 use App\Http\Controllers\Site\CombinaisonController;
 use App\Http\Controllers\Site\SettDataController;
 use Illuminate\Support\Facades\Password;
@@ -34,7 +35,6 @@ use App\Http\Controllers\Site\ImportController;
 
 /*Route de la page home du site */
 Route::get('/home',  [HomeController::class, 'home'])->name('home');
-
 
 
 /*Route pour la page d'inscription */
@@ -124,3 +124,7 @@ Route::post('/showSummary/{id}', [SettDataController::class, 'showSummary'])->na
 /*-------------------------------Routes pour l'import de données----------------------------------- */
 Route::get('/import', [ImportController::class, 'showForm'])->name('import.showForm');
 Route::post('/import', [ImportController::class, 'process'])->name('import.process');
+
+/*-------------------------------Routes pour l'administrateur ----------------------------------- */
+Route::get('/admin', [AdminController::class, 'searchUsers'])->name('admin.search');
+Route::get('/admin/{id}', [AdminController::class, 'userSetting'])->name('user.setting');
