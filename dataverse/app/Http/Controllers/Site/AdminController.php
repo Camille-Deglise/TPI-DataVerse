@@ -36,4 +36,13 @@ class AdminController extends Controller
         
         return view('admin.settingUser', ['user', $user]);
     }
+
+    public function deactivateUser($id)
+    {
+        $user = User::fin($id);
+
+        $user->is_activ = false;
+
+        return view('admin.settingUser')->with('success', 'l\'utilisateur a bien été désactivé');
+    }
 }
