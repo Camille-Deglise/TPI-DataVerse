@@ -7,7 +7,7 @@
 <div>
     Salut à vous, chers curieux de la météo ! <br>
     Ce petit site web vous permet de visualiser des graphiques ! <br>
-    En choissant un lieu, vous pouvez choisir des catégories de données météos 
+    En sélectionnant un lieu, vous pouvez choisir des catégories de données météos 
     et une durée dans le temps.  <br> Cela générera un graphique. Facile non ? <br>
 
     Vous avez la possibilité de vous inscrire afin d'apporter vos propres

@@ -119,12 +119,16 @@ Route::post('/combinaison/{id}', [CombinaisonController::class, 'combinaisonChar
 
 /*-------------------------------Routes pour les modifications de données------------------------- */
 Route::get('/settData', [SettDataController::class, 'showData'])->name('settData');
-Route::post('/showSummary/{id}', [SettDataController::class, 'showSummary'])->name('showSummary');
+Route::get('/showSummary/{id}', [SettDataController::class, 'showSummary'])->name('showSummary');
 
 /*-------------------------------Routes pour l'import de données----------------------------------- */
 Route::get('/import', [ImportController::class, 'showForm'])->name('import.showForm');
 Route::post('/import', [ImportController::class, 'process'])->name('import.process');
+Route::post('/reimport/{id}', [ImportController::class, 'reimport'])->name('reimport');
 
 /*-------------------------------Routes pour l'administrateur ----------------------------------- */
 Route::get('/admin', [AdminController::class, 'searchUsers'])->name('admin.search');
 Route::get('/admin/{id}', [AdminController::class, 'userSetting'])->name('user.setting');
+Route::post('/admin/deactivate/{id}', [AdminController::class, 'deactivateUser'])->name('deactivate.user');
+Route::post('/admin/reactivate/{id}', [AdminController::class, 'reactivateUser'])->name('reactivate.user');
+Route::post('/admin/send-reset-link/{id}', [AdminController::class, 'sendResetLink'])->name('send.reset.link');

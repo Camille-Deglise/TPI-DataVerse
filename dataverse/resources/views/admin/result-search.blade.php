@@ -17,4 +17,3 @@
     @endif
 @endif
 
-{{-- {{route('user.setting', ['id'=>$exactUser->id])}} --}}

@@ -16,6 +16,7 @@
 
 <form action="{{route('combinaison', ['id' =>$location->id])}}" method="POST">
     @csrf
+    @method('POST')
     <p>Choisissez une catégorie</p>
     <label for="precipitations">Précipitations</label> 
     <input type="radio" name="category" value="precipitations">

@@ -17,6 +17,7 @@ Pour importer un fichier, veuillez vous assurer que le type est <strong>CSV</str
 Ces colonnes comprennent les différentes données que vous pouvez importer. La seule obligatoire est <strong>statement_date</strong>.
 <form action="{{route('import.process')}}" method="POST" class="mt-10 mb-10" enctype="multipart/form-data">
     @csrf
+    @method('POST')
     <div class="mb-6 flex items-center">
         <label class="block text-gray-500 font-bold mr-4" for="locationImport" style="min-width: 100px;">
             Veuillez choisir un lieu 

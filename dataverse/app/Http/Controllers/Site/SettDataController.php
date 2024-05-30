@@ -34,27 +34,22 @@ class SettDataController extends Controller
             return redirect()->back()->with('error', 'Vous n\'avez pas importé de donnée');
          }
 
-        //Récupérer les données qui lui sont liées
-        $userId = $user->id;
-
-        $weatherDatas = WeatherData::whereIn('user_id', function($query) use ($userId)
-            {
-                $query->select('id')
-                ->from('weather_datas')
-                ->where('user_id', $userId);
-            })
+        $weatherDatas = WeatherData::where('user_id', $user->id)
             ->orderBy('imported_at', 'desc')
             ->join('locations', 'weather_datas.location_id', '=', 'locations.id')
-            ->get();
+            ->get(['weather_datas.*', 'locations.name']);
         
             return view('site.showData', compact('weatherDatas'));
     }
 
-    public function showSummary(Request $request)
+    public function showSummary(Request $request, $id)
     {
-       $weatherData = WeatherData::with('id')->find($request->id);
-        dd($weatherData);
-        
-        return view('site.showData', compact('datas'));
+        $weatherData = WeatherData::find($id);
+
+        if (!$weatherData) {
+            return redirect()->back()->with('error', 'Donnée météo non trouvée');
+        }
+
+        return view('site.showSummary', compact('weatherData'));
     }
 }

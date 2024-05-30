@@ -23,25 +23,4 @@
     <a href="http://localhost:8081/index.php?route=/" target="_blank" class=" m-4 border-2 text-gray-700 hover:bg-cyan-700 hover:text-white px-3 py-2  text-sm font-medium">phpMyAdmin</a>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @endsection
