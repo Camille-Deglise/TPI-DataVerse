@@ -69,32 +69,29 @@ class CombinaisonController extends Controller
      */
     public function combinaisonChart($id, Request $request)
     {
-        $location = Location::find($id);
-        if (!$location) {
-            $noChartData = new NoChartData('Pas de localisation disponible');
-            return view('site.combi', ['noChartData' => $noChartData]);
-        }
-
+       //Récupération du select des mois et des années pour début et fin
         $beginYear = $request->input('begin_year');
         $beginMonth = $request->input('begin_month');
         $endYear = $request->input('end_year');
         $endMonth = $request->input('end_month');
         $category = $request->input('category');
 
+        //Comparaison que la catégorie choisie et une catégorie valide
         $validCategories = ['precipitation', 'sunshine', 'snow', 'wind', 'temperature', 'humidity'];
         if (!in_array($category, $validCategories)) {
             $noChartData = new NoChartData('Catégorie invalide');
             return view('site.combi', [
                 'noChartData' => $noChartData,
-                'location' => $location,
                 'availableYears' => WeatherData::where('location_id', $id)->selectRaw('YEAR(statement_date) as year')->distinct()->pluck('year')->sort()->toArray(),
                 'availableMonths' => WeatherData::where('location_id', $id)->selectRaw('MONTH(statement_date) as month')->distinct()->pluck('month')->sort()->toArray()
             ]);
         }
-
+        
+        //Formatage des dates comme dans la base de données avec un jour 
         $beginDate = "$beginYear-$beginMonth-01";
-        $endDate = date("Y-m-t", strtotime("$endYear-$endMonth-01")); // Dernier jour du mois de fin
+        $endDate = date("Y-m-t", strtotime("$endYear-$endMonth-01")); 
 
+        //Récupération des données correspondantes aux dates choisies
         $weatherData = WeatherData::where('location_id', $id)
             ->whereBetween('statement_date', [$beginDate, $endDate])
             ->orderBy('statement_date', 'asc')
@@ -104,14 +101,15 @@ class CombinaisonController extends Controller
             $noChartData = new NoChartData('Pas de données météorologiques disponible pour cette période');
             return view('site.combi', [
                 'noChartData' => $noChartData,
-                'location' => $location,
                 'availableYears' => WeatherData::where('location_id', $id)->selectRaw('YEAR(statement_date) as year')->distinct()->pluck('year')->sort()->toArray(),
                 'availableMonths' => WeatherData::where('location_id', $id)->selectRaw('MONTH(statement_date) as month')->distinct()->pluck('month')->sort()->toArray()
             ]);
         }
 
+        //Initialisation de la variable qui contiendra le graphique
         $combiChart = null;
 
+        //Choix du graphique selon la catégorie
         switch ($category) {
             case 'precipitation':
                 $combiChart = app(WeatherChartController::class)->precipChart($weatherData);
@@ -133,18 +131,18 @@ class CombinaisonController extends Controller
                 break;
         }
 
+        //Cas où le graphique n'est pas généré
         if ($combiChart instanceof NoChartData) {
             return view('site.combi', [
                 'noChartData' => $combiChart,
-                'location' => $location,
                 'availableYears' => WeatherData::where('location_id', $id)->selectRaw('YEAR(statement_date) as year')->distinct()->pluck('year')->sort()->toArray(),
                 'availableMonths' => WeatherData::where('location_id', $id)->selectRaw('MONTH(statement_date) as month')->distinct()->pluck('month')->sort()->toArray()
             ]);
         }
-
+        
+        //Rendu du graphique avec toutes les dates 
         return view('site.combi', [
             'combiChart' => $combiChart,
-            'location' => $location,
             'beginYear' => $beginYear,
             'beginMonth' => $beginMonth,
             'endYear' => $endYear,

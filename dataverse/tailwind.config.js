@@ -6,6 +6,10 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
+    fontFamily : 
+    {
+      'cali' :['Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif']
+    },
     extend: {},
   },
   plugins: [],

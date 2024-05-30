@@ -30,34 +30,34 @@ class HomeController extends Controller
      * Retourne la vue de la vue home selon la connexion de l'utilisateur
      */
     public function home(Request $request)
-{
-    // Vérification de l'authentification de l'utilisateur
-    $userChecked = auth()->check();
-    $userAdmin = $userChecked ? auth()->user()->is_admin : false;
+    {
+        // Vérification de l'authentification de l'utilisateur
+        $userChecked = auth()->check();
+        $userAdmin = $userChecked ? auth()->user()->is_admin : false;
 
-    // Choix de la vue s'il est connecté ou non
-    if ($userChecked && $userAdmin) {
-        $whichView = 'admin.home-admin';
-    } else {
-        $whichView = $userChecked ? 'site.home-auth' : 'site.home';
+        // Choix de la vue s'il est connecté ou non
+        if ($userChecked && $userAdmin) {
+            $whichView = 'admin.home-admin';
+        } else {
+            $whichView = $userChecked ? 'site.home-auth' : 'site.home';
+        }
+
+        // Création d'un graphique aléatoire
+        $location = Location::inRandomOrder()->first();
+        $randomChartData = app(WeatherChartController::class)->randomWeatherChart($location);
+
+        // Vérification s'il y a une requête de type recherche
+        if ($request->has('search')) {
+            return $this->search($request, $whichView, $randomChartData);
+        }
+
+        return view($whichView, [
+            'randomChartData' => $randomChartData,
+            'location' => $location,
+            'search' => '',
+            'locations' => collect(),   // Collect reprend les lieux dans un tableau
+        ]);
     }
-
-    // Création d'un graphique aléatoire
-    $location = Location::inRandomOrder()->first();
-    $weatherChartController = new WeatherChartController();
-    $randomChartData = $weatherChartController->randomWeatherChart($location);
-
-    // Vérification s'il y a une requête de type recherche
-    if ($request->has('search')) {
-        return $this->search($request, $whichView, $randomChartData);
-    }
-
-    return view($whichView, [
-        'randomChartData' => $randomChartData,
-        'search' => '',
-        'locations' => collect(),   // Collect reprend les lieux dans un tableau
-    ]);
-}
 
     /**
      * Méthode privée pour la barre de recherche

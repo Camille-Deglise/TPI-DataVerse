@@ -33,7 +33,6 @@ class WeatherChartController extends Controller
      */
     private function getAvailableWeatherDatas($locationId)
     {
-        
         //Tableau contenant toutes les donneés météos
         $weatherdatas = ['precipitation', 'sunshine', 'snow', 'temperature', 'humidity', 'wind' ];
         
@@ -49,7 +48,6 @@ class WeatherChartController extends Controller
             $availableDatas[$data] = $count;
 
         }
-        
         return $availableDatas;
     }
 
@@ -64,33 +62,39 @@ class WeatherChartController extends Controller
         if (!$location) {
             return new NoChartData('Pas de localisation disponible');
         }
-    
+
         // Déterminer les données météorologiques disponibles pour cette localisation
+        // et retour si vide
         $availableDatas = $this->getAvailableWeatherDatas($location->id);
-    
-        // Vérifier si des données météorologiques sont disponibles
+
         if (empty($availableDatas)) {
             return new NoChartData('Pas de données météos disponible');
         }
-    
+
         // Sélectionner aléatoirement le type de données météorologiques à afficher
-        $randomData = $availableDatas[array_rand($availableDatas)];
-    
-        // Reprendre les données météorologiques pour une date aléatoire
+        $randomData = array_rand($availableDatas);
+
+        // Reprendre les données météorologiques pour plusieurs dates aléatoires
         $randomWeatherData = WeatherData::where('location_id', $location->id)
-            ->inRandomOrder() // Choisir aléatoirement un enregistrement
-            ->first();
-    
+            ->whereNotNull($randomData)
+            ->inRandomOrder() 
+            ->limit(5) 
+            ->orderBy('statement_date', 'desc')
+            ->get();
+
         // Vérifier si des données météorologiques ont été trouvées
-        if (!$randomWeatherData) {
+        if ($randomWeatherData->isEmpty()) {
             return new NoChartData('Pas de données météorologiques disponible pour cette localisation');
         }
-    
-        // Créer le graphique avec les données sélectionnées
+        
+        //Axes X et Y
+        $dates = $randomWeatherData->pluck('statement_date')->toArray();
+        $weatherDatasDef = $randomWeatherData->pluck($randomData)->toArray();
+        // Créer le graphique 
         $randomChart = new WeatherChart;
-        $randomChart->labels([$randomWeatherData->statement_date]);
-        $randomChart->dataset(ucfirst($randomData), 'bar', [$randomWeatherData->$randomData])->backgroundColor('rgb(58, 129, 139)');
-    
+        $randomChart->labels($dates);
+        $randomChart->dataset(ucfirst($randomData), 'bar', $weatherDatasDef)->backgroundColor('rgb(58, 129, 139)');
+
         return $randomChart;
     }
 
