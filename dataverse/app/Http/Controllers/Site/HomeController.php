@@ -48,50 +48,73 @@ class HomeController extends Controller
 
         // Vérification s'il y a une requête de type recherche
         if ($request->has('search')) {
-            return $this->search($request, $whichView, $randomChartData);
+            $fromCombi = $request->input('from_combi', false);
+            return $this->search($request, $whichView, $randomChartData, $fromCombi);
         }
 
         return view($whichView, [
             'randomChartData' => $randomChartData,
             'location' => $location,
             'search' => '',
-            'locations' => collect(),   // Collect reprend les lieux dans un tableau
+            'locations' => collect(),  //Pour les vues
         ]);
     }
 
     /**
-     * Méthode privée pour la barre de recherche
+     * Méthode pour la fonctionnalité de recherche
      * @param Request $request
-     * @param $view
-     * @param $randomChartData  Nécessaire si la vue choisie est pour l'utilisateur non connecté
-     * Retourne une vue qui est déterminée par la méthode home 
+     * @param $view 
+     * @param $randomChartData
+     * @param $fromCombi 
+     * Fonctionnement différent si la recherche provient de home ou de combinaison
      */
-    private function search(Request $request, $view, $randomChartData)
+    public function search(Request $request, $view, $randomChartData, $fromCombi = false)
     {
-        //Initialisation d'une variable qui prend ocmme valeur la recherche 
-        $search = $request->input('search');
-        
-        //Query Builder pour les lieux
-        $locationsQuery = Location::query();
+        $query = $request->input('search');
     
-        // Recherche de lieux avec des lettres en commun avec la recherche
-        $locationsQuery->where('name', 'like', '%' . $search . '%');
-        
-        //Exécution de la requête (Sans cela, ne récupérait pas les résultats, toujours vides.)
-        $locations = $locationsQuery->get(); 
-        
-        //Détermine le lieu exact 
-        $exactLocation = $locationsQuery->where('name', $search)
-                                        ->orWhere('zipcode', $search)
-                                        ->first();
+        // Recherche de la correspondance exacte
+        $exactLocation = Location::where('name', $query)->first();
     
-        // Retourner la vue avec les résultats de la recherche
-        return view($view, [
-            'randomChartData' => $randomChartData,
-            'search' => $search,
-            'locations' => $locations, 
-            'exactLocation' => $exactLocation,
-        ]);
+        if ($exactLocation) {
+            // Rediriger vers la vue combi du lieu trouvé
+            return redirect()->route('combi', ['id' => $exactLocation->id]);
+        }
+    
+        // Si aucune correspondance exacte, continuer avec la recherche partielle
+        $locations = Location::where('name', 'like', '%' . $query . '%')->get();
+    
+        // Si la recherche provient de la vue combi, renvoyer à combi avec les résultats partiels
+        if ($fromCombi) {
+            return view('site.combi', [
+                'randomChartData' => $randomChartData,
+                'search' => $query,
+                'locations' => $locations,
+                'location' => $locations->first() ?? null,
+                'availableYears' => $locations->isNotEmpty()
+                                ? WeatherData::where('location_id', $locations->first()->id)
+                                    ->selectRaw('YEAR(statement_date) as year')
+                                    ->distinct()
+                                    ->pluck('year')
+                                    ->sort()
+                                    ->toArray()
+                                : [],
+                'availableMonths' => $locations->isNotEmpty()
+                                ? WeatherData::where('location_id', $locations->first()->id)
+                                    ->selectRaw('MONTH(statement_date) as month')
+                                    ->distinct()
+                                    ->pluck('month')
+                                    ->sort()
+                                    ->toArray()
+                                : [],
+            ]);
+        } else {
+            return view($view, [
+                'randomChartData' => $randomChartData,
+                'search' => $query,
+                'locations' => $locations,
+            ]);
+        }
     }
-  
+    
+    
 }
