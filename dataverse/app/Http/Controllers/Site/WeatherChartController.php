@@ -106,13 +106,13 @@ class WeatherChartController extends Controller
         {
             return $data ->precipitation != null;
         });
-
+        
         //S'il n' y a pas suffisamment de valeurs pour générer un graphique 
         if($weatherdatasFiltred->pluck('precipitation')->count()<3)
         {
             return new NoChartData("Il manque des données pour générer un graphique");
         }
-        dd($weatherdatasFiltred);
+        //dd($weatherdatasFiltred);
         $precipChart = new WeatherChart;
  
         //Axe X
@@ -123,7 +123,7 @@ class WeatherChartController extends Controller
         //dd($precipitations);
         //Associations des axes 
         $precipChart->labels($dates);
-        $precipChart->dataset('Précipitations', 'bar', $precipitations)->backgroundColor('rgb(109, 204, 217)');
+        $precipChart->dataset('Précipitations', 'line', $precipitations)->backgroundColor('rgb(109, 204, 217)');
 
         return $precipChart;
     }
@@ -152,7 +152,7 @@ class WeatherChartController extends Controller
 
         //Associations des axes 
         $sunChart->labels($dates);
-        $sunChart->dataset('Ensoleillement', 'bar', $sunshine)->backgroundColor('rgb(239, 208, 35)');
+        $sunChart->dataset('Ensoleillement', 'line', $sunshine)->backgroundColor('rgb(239, 208, 35)');
 
         return $sunChart;
     }
@@ -181,7 +181,7 @@ class WeatherChartController extends Controller
 
         //Associations des axes 
         $snowChart->labels($dates);
-        $snowChart->dataset('Ensoleillement', 'bar', $snow)->backgroundColor('rgb(176, 203, 201)');
+        $snowChart->dataset('Neige', 'bar', $snow)->backgroundColor('rgb(176, 203, 201)');
 
         return $snowChart;
     }
@@ -210,7 +210,7 @@ class WeatherChartController extends Controller
 
         //Associations des axes 
         $windChart->labels($dates);
-        $windChart->dataset('Ensoleillement', 'bar', $wind)->backgroundColor('rgb(167, 214, 182)');
+        $windChart->dataset('Vent', 'line', $wind)->backgroundColor('rgb(167, 214, 182)');
 
         return $windChart;
     }
@@ -239,7 +239,7 @@ class WeatherChartController extends Controller
 
         //Associations des axes 
         $tempChart->labels($dates);
-        $tempChart->dataset('Ensoleillement', 'bar', $temperatures)->backgroundColor('rgb(243, 165, 67 )');
+        $tempChart->dataset('Températures', 'line', $temperatures)->backgroundColor('rgb(243, 165, 67 )');
 
         return $tempChart;
     }
@@ -268,7 +268,7 @@ class WeatherChartController extends Controller
 
         //Associations des axes 
         $humiChart->labels($dates);
-        $humiChart->dataset('Ensoleillement', 'bar', $humidity)->backgroundColor('rgb(95, 113, 231)');
+        $humiChart->dataset('Humidité', 'bar', $humidity)->backgroundColor('rgb(167, 116, 241)');
 
         return $humiChart;
     }

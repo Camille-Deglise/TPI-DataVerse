@@ -30,14 +30,35 @@ class CombinaisonController extends Controller
      */
     public function combi($id)
     {
-        //Définir et retrouver l'id du lieu cliqué
+        // Définir et retrouver l'id du lieu cliqué
         $location = Location::find($id);
 
-        if($location)
-        {
-            return view('site.combi', ['location' => $location]);
+        if ($location) {
+            // Récupérer les années et les mois disponibles pour ce lieu
+            $availableYears = WeatherData::where('location_id', $id)
+                                ->selectRaw('YEAR(statement_date) as year')
+                                ->distinct()
+                                ->pluck('year')
+                                ->sort()
+                                ->toArray();
+            
+            $availableMonths = WeatherData::where('location_id', $id)
+                                ->selectRaw('MONTH(statement_date) as month')
+                                ->distinct()
+                                ->pluck('month')
+                                ->sort()
+                                ->toArray();
+
+            return view('site.combi', [
+                'location' => $location,
+                'availableYears' => $availableYears,
+                'availableMonths' => $availableMonths,
+            ]);
         }
+
+        return view('site.combi', ['location' => null]);
     }
+
 
 
     /**
@@ -48,36 +69,49 @@ class CombinaisonController extends Controller
      */
     public function combinaisonChart($id, Request $request)
     {
-        // Vérifier si le lieu est bien fourni
         $location = Location::find($id);
         if (!$location) {
-            return new NoChartData('Pas de localisation disponible');
+            $noChartData = new NoChartData('Pas de localisation disponible');
+            return view('site.combi', ['noChartData' => $noChartData]);
         }
-        //OK dd($location);
-       
-        // Récupérer les données météorologiques pour ce lieu et cette plage de dates
-        $beginDate = $request->input('begin_date');
-        $endDate = $request->input('end_date');
+
+        $beginYear = $request->input('begin_year');
+        $beginMonth = $request->input('begin_month');
+        $endYear = $request->input('end_year');
+        $endMonth = $request->input('end_month');
         $category = $request->input('category');
-        //OK dd($beginDate);
-        //OK dd($endDate);
-        //OK dd($category);
+
+        $validCategories = ['precipitation', 'sunshine', 'snow', 'wind', 'temperature', 'humidity'];
+        if (!in_array($category, $validCategories)) {
+            $noChartData = new NoChartData('Catégorie invalide');
+            return view('site.combi', [
+                'noChartData' => $noChartData,
+                'location' => $location,
+                'availableYears' => WeatherData::where('location_id', $id)->selectRaw('YEAR(statement_date) as year')->distinct()->pluck('year')->sort()->toArray(),
+                'availableMonths' => WeatherData::where('location_id', $id)->selectRaw('MONTH(statement_date) as month')->distinct()->pluck('month')->sort()->toArray()
+            ]);
+        }
+
+        $beginDate = "$beginYear-$beginMonth-01";
+        $endDate = date("Y-m-t", strtotime("$endYear-$endMonth-01")); // Dernier jour du mois de fin
 
         $weatherData = WeatherData::where('location_id', $id)
             ->whereBetween('statement_date', [$beginDate, $endDate])
             ->orderBy('statement_date', 'asc')
             ->get();
-        
-        //OK dd($weatherData);
 
-        // Vérifier si des données ont été trouvées
         if ($weatherData->isEmpty()) {
-            return new NoChartData('Pas de données météorologiques disponible pour cette période');
+            $noChartData = new NoChartData('Pas de données météorologiques disponible pour cette période');
+            return view('site.combi', [
+                'noChartData' => $noChartData,
+                'location' => $location,
+                'availableYears' => WeatherData::where('location_id', $id)->selectRaw('YEAR(statement_date) as year')->distinct()->pluck('year')->sort()->toArray(),
+                'availableMonths' => WeatherData::where('location_id', $id)->selectRaw('MONTH(statement_date) as month')->distinct()->pluck('month')->sort()->toArray()
+            ]);
         }
-    
-        // Sélectionner la fonction de graphique appropriée
-        $combiChart = new WeatherChart();
-        //dd($combiChart);
+
+        $combiChart = null;
+
         switch ($category) {
             case 'precipitation':
                 $combiChart = app(WeatherChartController::class)->precipChart($weatherData);
@@ -97,10 +131,29 @@ class CombinaisonController extends Controller
             case 'humidity':
                 $combiChart = app(WeatherChartController::class)->humiChart($weatherData);
                 break;
-   
         }
-        //dd($combiChart);
-        return view('site.combi', ['combiChart' => $combiChart, 'location' => $location]);
-        
+
+        if ($combiChart instanceof NoChartData) {
+            return view('site.combi', [
+                'noChartData' => $combiChart,
+                'location' => $location,
+                'availableYears' => WeatherData::where('location_id', $id)->selectRaw('YEAR(statement_date) as year')->distinct()->pluck('year')->sort()->toArray(),
+                'availableMonths' => WeatherData::where('location_id', $id)->selectRaw('MONTH(statement_date) as month')->distinct()->pluck('month')->sort()->toArray()
+            ]);
+        }
+
+        return view('site.combi', [
+            'combiChart' => $combiChart,
+            'location' => $location,
+            'beginYear' => $beginYear,
+            'beginMonth' => $beginMonth,
+            'endYear' => $endYear,
+            'endMonth' => $endMonth,
+            'category' => $category,
+            'availableYears' => WeatherData::where('location_id', $id)->selectRaw('YEAR(statement_date) as year')->distinct()->pluck('year')->sort()->toArray(),
+            'availableMonths' => WeatherData::where('location_id', $id)->selectRaw('MONTH(statement_date) as month')->distinct()->pluck('month')->sort()->toArray()
+        ]);
     }
+
+
 }
