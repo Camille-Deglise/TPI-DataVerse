@@ -95,6 +95,8 @@ class HomeController extends Controller
      */
     public function search(Request $request, $view, $randomChartData, $fromCombi = false)
     {
+        //Récupération de l'ID de l'utilisateur 
+        //$SweatherDatas est utilisé lors du return sur la page home-auth
         $user = auth()->user();
         $userId = $user->id;
         
@@ -103,10 +105,11 @@ class HomeController extends Controller
             ->join('locations', 'weather_datas.location_id', '=', 'locations.id')
             ->limit(5)
             ->get(['weather_datas.*', 'locations.name']);
-
-        $query = $request->input('search');
         
+        //Reprise de la recherche dans query 
+        $query = $request->input('search');
         $location = Location::find($query); 
+        
         // Recherche de la correspondance exacte
         $exactLocation = Location::where('name', $query)->first();
     
@@ -115,7 +118,7 @@ class HomeController extends Controller
             return redirect()->route('combi', ['id' => $exactLocation->id]);
         }
     
-        // Si aucune correspondance exacte, continuer avec la recherche partielle
+        // Si non, continuer avec la recherche partielle
         $locations = Location::where('name', 'like', '%' . $query . '%')->get();
     
         // Si la recherche provient de la vue combi, renvoyer à combi avec les résultats partiels
@@ -142,6 +145,7 @@ class HomeController extends Controller
                                     ->toArray()
                                 : [],
             ]);
+            //Si la recherche provient d'une des vues home
         } else {
             return view($view, [
                 'randomChartData' => $randomChartData,

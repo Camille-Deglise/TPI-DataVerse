@@ -84,7 +84,8 @@ class CombinaisonController extends Controller
         $endMonth = $request->input('end_month');
         $category = $request->input('category');
     
-        
+        //Validation des catégories pour des questions d'être certain que les données fournies
+        //correspondent à ce qui est attendu 
         $validCategories = ['precipitation', 'sunshine', 'snow', 'wind', 'temperature', 'humidity'];
         if (!in_array($category, $validCategories)) {
             $noChartData = new NoChartData('Catégorie invalide');
@@ -94,7 +95,8 @@ class CombinaisonController extends Controller
         //Formatage et calcul des dates
         $beginDate = "$beginYear-$beginMonth-01";
         $endDate = date("Y-m-t", strtotime("$endYear-$endMonth-01")); 
-    
+        
+        //Récupération des valeurs choisies par l'utilisateur pour son graphique
         $weatherData = WeatherData::where('location_id', $id)
             ->whereBetween('statement_date', [$beginDate, $endDate])
             ->orderBy('statement_date', 'asc')
