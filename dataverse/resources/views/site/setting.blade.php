@@ -3,7 +3,8 @@
 @section('page-title', 'Modifier mon profil')
 @section('content')
 
-<form class="w-full max-w-sm mx-auto" action="{{route('setting.update', $user->id)}}" method="POST">
+<div class="font-cali">
+  <form class="w-full max-w-sm mx-auto" action="{{route('setting.update', $user->id)}}" method="POST">
     @csrf
     @method('PUT')
     <input type="hidden" name="user_id" value="{{ $user->id }}">
@@ -46,11 +47,13 @@
       </div>
     </div>
   </form>
+</div>
 
 
+<div class="font-cali">
   <form class="w-full max-w-sm mx-auto" action="{{route('setting.updpwd', $user->id)}}" method="POST">
     @csrf
-    
+    @method('put')
     <input type="hidden" name="user_id" value="{{ $user->id }}">
     <div class="mt-10 mb-6 flex items-center">
       <label class="block text-gray-500 font-bold mr-4" for="password" style="min-width: 100px;">
@@ -77,7 +80,19 @@
         </div>
     </div>
   </form>
-    
+</div>
+  
+<div class="mt-4 font-cali">
+    <form class="w-full max-w-sm mx-auto" action="{{route('setting.deactivate', $user->id)}}" method="POST">
+    @csrf
+            <button type="submit" class="shadow bg-red-300 hover:bg-red-400 focus:shadow-outline focus:outline-none text-gray-800 font-bold py-2 px-4 rounded">
+              Désactiver mon compte</button>
+  </form>
+    <form class="w-full max-w-sm mx-auto" id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      @csrf
+      @method('DELETE')
+  </form>
+</div>  
 
   @if (session('error'))
     <div class="alert alert-danger">

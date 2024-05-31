@@ -128,7 +128,7 @@ class CombinaisonController extends Controller
                 return app(WeatherChartController::class)->tempChart($weatherData);
             case 'humidity':
                 return app(WeatherChartController::class)->humiChart($weatherData);
-        
+
         }
     }
 

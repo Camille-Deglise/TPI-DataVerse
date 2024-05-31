@@ -31,6 +31,7 @@ class HomeController extends Controller
      */
     public function home(Request $request)
     {
+        
         // Vérification de l'authentification de l'utilisateur
         $userChecked = auth()->check();
         $userAdmin = $userChecked ? auth()->user()->is_admin : false;
@@ -46,18 +47,42 @@ class HomeController extends Controller
         $location = Location::inRandomOrder()->first();
         $randomChartData = app(WeatherChartController::class)->randomWeatherChart($location);
 
+
         // Vérification s'il y a une requête de type recherche
         if ($request->has('search')) {
-            $fromCombi = $request->input('from_combi', false);
-            return $this->search($request, $whichView, $randomChartData, $fromCombi);
+        $fromCombi = $request->input('from_combi', false);
+        return $this->search($request, $whichView, $randomChartData, $fromCombi);
         }
 
-        return view($whichView, [
-            'randomChartData' => $randomChartData,
-            'location' => $location,
-            'search' => '',
-            'locations' => collect(),  //Pour les vues
-        ]);
+
+        if($userChecked)
+        {
+            $user = auth()->user();
+                    $userId = $user->id;
+                    $weatherDatas = WeatherData::where('user_id', $userId)
+                        ->orderBy('imported_at', 'desc')
+                        ->join('locations', 'weather_datas.location_id', '=', 'locations.id')
+                        ->limit(5)
+                        ->get(['weather_datas.*', 'locations.name']);
+            
+
+            return view($whichView, [
+                'randomChartData' => $randomChartData,
+                'weatherDatas' => $weatherDatas,
+                'location' => $location,
+                'search' => '',
+                'locations' => collect(),  //Pour les vues
+            ]);
+        }
+        else
+        {
+            return view($whichView, [
+                'randomChartData' => $randomChartData,
+                'location' => $location,
+                'search' => '',
+                'locations' => collect(),  //Pour les vues
+            ]);
+        }
     }
 
     /**
@@ -70,8 +95,18 @@ class HomeController extends Controller
      */
     public function search(Request $request, $view, $randomChartData, $fromCombi = false)
     {
+        $user = auth()->user();
+        $userId = $user->id;
+        
+        $weatherDatas = WeatherData::where('user_id', $userId)
+            ->orderBy('imported_at', 'desc')
+            ->join('locations', 'weather_datas.location_id', '=', 'locations.id')
+            ->limit(5)
+            ->get(['weather_datas.*', 'locations.name']);
+
         $query = $request->input('search');
-    
+        
+        $location = Location::find($query); 
         // Recherche de la correspondance exacte
         $exactLocation = Location::where('name', $query)->first();
     
@@ -110,6 +145,8 @@ class HomeController extends Controller
         } else {
             return view($view, [
                 'randomChartData' => $randomChartData,
+                'weatherDatas' => $weatherDatas,
+                'location' => $location,
                 'search' => $query,
                 'locations' => $locations,
             ]);

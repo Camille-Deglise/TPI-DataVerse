@@ -19,7 +19,7 @@
 
         <!--Contenu -->
         <div class="text-center py-4 font-cali">
-            <h1 class="text-4xl font-semibold mb-2 text-cyan-900">@yield('page-title')</h1>
+            <h1 class="text-4xl font-semibold text-cyan-900 mt-6 mb-10 shadow-md shadow-slate-600">@yield('page-title')</h1>
         </div>
         
         <div class="content container mx-auto px-2 py-2">

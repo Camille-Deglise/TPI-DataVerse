@@ -51,7 +51,14 @@ class LoginController extends Controller
     public function doLogin(LoginRequest $request) {
         // Vérification des données avec méthode validated et enregistrement dans une variable
         $credentials = $request->validated();
+    
+        // Vérification si l'utilisateur existe et est actif
+        $user = User::where('email', $credentials['email'])->first();
         
+        if ($user && !$user->is_activ) {
+            return redirect()->route('login')->withErrors(['email' => 'Votre compte est désactivé. Veuillez contacter l\'administrateur.'])->withInput($request->only('email'));
+        }
+    
         // Tentative de connexion
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
@@ -65,15 +72,16 @@ class LoginController extends Controller
                 return redirect()->route('login')->withErrors(['email' => "Email non vérifié"])->withInput($request->only('email'));
             }
         }
-        
+    
         // Vérification si l'email existe dans la base de données
         $user = User::where('email', $request->email)->first();
         if (!$user) {
             // Email inexistant dans la base de données
             return redirect()->route('login')->withErrors(['email' => "Email inexistant"])->withInput($request->only('email'));
         }
-        
+    
         // Identifiants incorrects
         return redirect()->route('login')->withErrors(['email' => 'Identifiants incorrects'])->withInput($request->only('email'));
     }
+    
 }

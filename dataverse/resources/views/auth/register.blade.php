@@ -4,7 +4,7 @@
 @section('page-title', 'Inscription')
     
 @section('content')
-<form class="w-full max-w-sm mx-auto" action="{{ route('register') }}" method="POST">
+<form class="w-full max-w-sm mx-auto mt-2" action="{{ route('register') }}" method="POST">
   @csrf
     <div class="mb-6 flex items-center">
         <label class="block text-gray-500 font-bold mr-4" for="lastname" style="min-width: 100px;">Nom</label>

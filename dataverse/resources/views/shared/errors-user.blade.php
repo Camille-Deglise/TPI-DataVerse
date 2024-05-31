@@ -9,7 +9,7 @@
 
 @if ($errors->any())
 <div role="alert"
-    class="relative flex w-full px-4 py-4 text-base text-gray-900 rounded-lg font-regular bg-gray-900/10"
+    class="relative flex w-full px-4 py-2 text-base text-gray-900 rounded-lg font-regular bg-gray-900/10"
     style="opacity: 1;">
     <div class="shrink-0">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"

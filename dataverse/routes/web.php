@@ -110,8 +110,9 @@ Route::post('/reset-password', function (Request $request) {
 
 /*--------------------------Routes pour les modifications de l'utilisateur------------------ */
 Route::get('/setting', [SettingController::class, 'edit'])->name('setting.edit');
-Route::put('/setting/{user}', [SettingController::class, 'update'])->name('setting.update');
-Route::post('/setting/{user}', [SettingController::class, 'updpwd'])->name('setting.updpwd');
+Route::put('/setting/update/{user}', [SettingController::class, 'update'])->name('setting.update');
+Route::put('/setting/updwd/{user}', [SettingController::class, 'updpwd'])->name('setting.updpwd');
+Route::post('/setting/deactivate/{user}', [SettingController::class, 'deactivateAccount'])->name('setting.deactivate');
 
 /*--------------------------Routes pour les graphiques combinés------------------ */
 Route::get('/combi/{id}', [CombinaisonController::class, 'combi'])->name('combi');
