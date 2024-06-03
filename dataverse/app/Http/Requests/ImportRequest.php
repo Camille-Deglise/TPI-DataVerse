@@ -3,7 +3,18 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+//------------------------------
+// ETML - TPI
+// Auteur : Camille Déglise
+// Date : 28.05.2024
+// Modification :  selon commit de git
+//-------------------------------
 
+
+/**
+ * Classe de type FormRequest
+ * Contient les méthodes gérant la validation des données
+*/
 class ImportRequest extends FormRequest
 {
     /**
@@ -23,8 +34,8 @@ class ImportRequest extends FormRequest
     {
         return [
 
-            'newLocationName' => ['nullable','string','max:163', 'regex:/^[a-zA-ZÀ-ÿ\-\' ]+$/'],
-            'newLocationZip' => ['nullable','string', 'max:10', 'regex:/^[a-zA-Z0-9\-\ ]*$/']
+            'newLocationName' => ['nullable', 'unique:locations,name', 'string','max:163', 'regex:/^[a-zA-ZÀ-ÿ\-\' ]+$/'],
+            'newLocationZip' => ['nullable','unique:locations,zipcode','string', 'max:10', 'regex:/^[a-zA-Z0-9\-\ ]*$/']
         ];
     }
 }

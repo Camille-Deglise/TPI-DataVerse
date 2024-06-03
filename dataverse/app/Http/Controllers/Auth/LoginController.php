@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 // ETML - TPI
 // Auteur : Camille Déglise
 // Date : 21.05.2024
-// Modification : selon commit de git
+// Modification : selon commit de gitHub
 //-------------------------------
 
 
@@ -43,13 +43,14 @@ class LoginController extends Controller
 
       /**
      * Méthode pour le login de l'utilisateur
-     * Va vérifier si l'email de l'utilisateur est vérifié
-     * Va vérifier si les crédentiels de l'utilisateur sont :
-     * Reconnus dans la base de données
-     * Valides 
+     * Vérifie si l'email de l'utilisateur est vérifié
+     * Vérifie si l'utilisateur est actif
+     * Vérifie si les crédentiels de l'utilisateur sont :
+     *         °Reconnus dans la base de données
+     *         °Valides 
      */
     public function doLogin(LoginRequest $request) {
-        
+
         // Vérification des données avec méthode validated et enregistrement dans une variable
         $credentials = $request->validated();
     

@@ -15,8 +15,6 @@ use App\Models\User;
 //-------------------------------
 
 
-
-
 /**
  * Classe de type Controller 
  * Contient les méthodes de vérification de l'utilisateur 

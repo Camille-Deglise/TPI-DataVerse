@@ -22,6 +22,7 @@ class SettDataController extends Controller
 {
     /**
      * Méthode d'affichage de la vue principale de gestion des données de l'utilisateur
+     * Retourne une vue avec les données météos de l'utilisateur 
      */
     public function showData()
     {
@@ -42,6 +43,12 @@ class SettDataController extends Controller
             return view('site.showData', compact('weatherDatas'));
     }
 
+    /**
+     * Méthode d'affichage du résumé de la donnée choisie
+     * @param Request $request
+     * @param $id 
+     * Retourne une vue 
+     */
     public function showSummary(Request $request, $id)
     {
         $weatherData = WeatherData::find($id);

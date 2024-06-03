@@ -26,7 +26,7 @@ class CombinaisonController extends Controller
       /**
      * Méthode pour la liste de liens
      * @param $id
-     * Retourne la vue combi avec le lieu
+     * Retourne la vue combi avec ou sans le lieu selon la recherche initiale
      */
     public function combi($id)
     {
@@ -71,7 +71,7 @@ class CombinaisonController extends Controller
      * Méthode qui effectue la combinaison et permet l'affichage du graphique
      * @param $id
      * @param Request $request
-     * Retourne la vue combi avec le graphique
+     * Retourne la vue combi avec les paramètres des méthodes privées
      */
     public function combinaisonChart($id, Request $request)
     {

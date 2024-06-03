@@ -22,6 +22,10 @@ use App\Models\WeatherData;
 
 class ImportController extends Controller
 {
+    /**
+     * Méthode d'affichage du formulaire d'import
+     * Retourne la vue 
+     */
     public function showForm()
     {
         $locationsImport = Location::all();
@@ -29,7 +33,12 @@ class ImportController extends Controller
         return view('site.import', ['locationsImport' => $locationsImport]);
     }
 
-
+    /**
+     * Méthode d'importation du fichier CSV
+     * Avec ou sans ajout d'un noueau lieu 
+     * @param ImportRequest $request
+     * Retourne sur la vue du formulaire avec des messages de succès ou d'erreurs
+     */
     public function process(ImportRequest $request)
     {
 
@@ -116,7 +125,13 @@ class ImportController extends Controller
         return redirect()->back()->withErrors('Veuillez sélectionner un fichier de format CSV.');
     }
     
-
+    
+    /**
+     * Méthode pour réimporter le fichier CSV d'un import en particulier
+     * @param Request $request
+     * @param $id
+     * Retourne sur la vue de gestion de la donnée avec message de succès ou d'erreur
+     */
     public function reimport(Request $request, $id)
     {
         // Récupérer l'ID de la location associée aux données météo

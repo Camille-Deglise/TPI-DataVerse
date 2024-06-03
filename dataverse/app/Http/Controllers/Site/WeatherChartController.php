@@ -29,6 +29,7 @@ class WeatherChartController extends Controller
     /**
      * Méthode privée pour retrouver les données météos qui contiennent 
      * des valeurs
+     * @param $locationId
      * Retourne un tableau de valeurs qui contient les données avec des valeurs
      */
     private function getAvailableWeatherDatas($locationId)
@@ -54,6 +55,7 @@ class WeatherChartController extends Controller
 
     /**
      * Méthode publique de création de graphique aléatoire
+     * @param $location 
      * Retourne un graphique
      */
     public function randomWeatherChart($location)
@@ -100,6 +102,7 @@ class WeatherChartController extends Controller
 
     /**
      * Méthode publique de création de graphique pour les précipitations
+     * @param $weatherData
      * Retourne un graphique
      */
     public function precipChart($weatherData)
@@ -132,6 +135,11 @@ class WeatherChartController extends Controller
         return $precipChart;
     }
 
+    /**
+     * Méthode publique de création de graphique pour l'ensoleillement
+     * @param $weatherData
+     * Retourne un graphique
+     */
     public function sunshineChart($weatherData)
     {   
         //Filtre les données récupérées si elles ne sont pas à null
@@ -161,6 +169,11 @@ class WeatherChartController extends Controller
         return $sunChart;
     }
 
+    /**
+     * Méthode publique de création de graphique pour l'enneignement
+     * @param $weatherData
+     * Retourne un graphique
+     */
     public function snowChart($weatherData)
     {   
         //Filtre les données récupérées si elles ne sont pas à null
@@ -190,6 +203,11 @@ class WeatherChartController extends Controller
         return $snowChart;
     }
 
+    /**
+     * Méthode publique de création de graphique pour le vent
+     * @param $weatherData
+     * Retourne un graphique
+     */
     public function windChart($weatherData)
     {   
         //Filtre les données récupérées si elles ne sont pas à null
@@ -219,6 +237,11 @@ class WeatherChartController extends Controller
         return $windChart;
     }
 
+    /**
+     * Méthode publique de création de graphique pour les températures
+     * @param $weatherData
+     * Retourne un graphique
+     */
     public function tempChart($weatherData)
     {   
         //Filtre les données récupérées si elles ne sont pas à null
@@ -248,6 +271,11 @@ class WeatherChartController extends Controller
         return $tempChart;
     }
 
+    /**
+     * Méthode publique de création de graphique pour l'humidité
+     * @param $weatherData
+     * Retourne un graphique
+     */
     public function humiChart($weatherData)
     {   
         //Filtre les données récupérées si elles ne sont pas à null

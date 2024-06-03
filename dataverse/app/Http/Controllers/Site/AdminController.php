@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Password;
  */
 class AdminController extends Controller
 {
+    /**
+     * Méthode de la recherche des utilisateurs par l'administrateur
+     * Prend la requête HTTP en paramètres
+     * Retourne la vue hom-admin avec les résultats de la recherche
+     */
     public function searchUsers(Request $request)
     {
         //Initialisation de la variable pour la recherche
@@ -52,6 +57,11 @@ class AdminController extends Controller
         return view('admin.settingUser', ['user' => $user]);
     }
 
+    /**
+     * Méthode pour désactiver l'utilisateur
+     * @param $id
+     * Retourne sur la page de gestion de l'utilisateur avec message de succès
+     */
     public function deactivateUser($id)
     {
         $user = User::find($id);
@@ -62,6 +72,11 @@ class AdminController extends Controller
         return redirect()->route('user.setting', ['id' => $user->id])->with('success', 'L\'utilisateur a bien été désactivé.');
     }
 
+    /**
+     * Méthode pour réactiver l'utilisateur
+     * @param $id
+     * Retourne sur la page de gestion de l'utilisateur avec message de succès
+     */
     public function reactivateUser($id)
     {
         $user = User::find($id);
@@ -71,6 +86,11 @@ class AdminController extends Controller
         return redirect()->route('user.setting', ['id' =>$user->id])->with('success', 'L\'utilisateur a bien été réactivé.');
     }
 
+    /**
+     * Méthode pour envoyer le lien de réinitilisation du mot de passe à l'utilisateur
+     * @param $id
+     * Retourne sur la page de gestion de l'utilisateur avec message de succès ou d'erreurs
+     */
     public function sendResetLink($id)
     {
         $user = User::find($id);

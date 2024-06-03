@@ -45,6 +45,8 @@ class SettingController extends Controller
 
     /**
      * Méthode pour modifier les données de l'utilisateur dans la base de données
+     * @param SettingRequest $request
+     * @param User $user
      * Retourne une redirection avec un message de succès
      */
     public function update(SettingRequest $request, User $user)
@@ -60,6 +62,8 @@ class SettingController extends Controller
 
     /**
      * Méthode pour modifier le mot de passe de l'utilisateur dans la base de données
+     * @param PwdSettingRequest $request
+     * @param User $user
      * Retourne une redirection avec un message de succès
      */
     public function updpwd(PwdSettingRequest $request, User $user)
@@ -75,6 +79,12 @@ class SettingController extends Controller
         return redirect()->route('setting.edit')->with('success', 'Votre mot de passe a bien été modifié');
     }
 
+    /**
+     * Méthode pour désactiver le compte par l'utilisateur
+     * @param Request $request
+     * @param $id
+     * Déconnecte l'utilisateur avec un message de succès 
+     */
     public function deactivateAccount(Request $request, $id)
     {
         $user = User::find($id);

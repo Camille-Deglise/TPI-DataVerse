@@ -54,7 +54,7 @@ class HomeController extends Controller
         return $this->search($request, $whichView, $randomChartData, $fromCombi);
         }
 
-
+        //Si l'utilisateur est connecté
         if($userChecked)
         {
             $user = auth()->user();
@@ -71,7 +71,7 @@ class HomeController extends Controller
                 'weatherDatas' => $weatherDatas,
                 'location' => $location,
                 'search' => '',
-                'locations' => collect(),  //Pour les vues
+                'locations' => collect(), 
             ]);
         }
         else
@@ -80,7 +80,7 @@ class HomeController extends Controller
                 'randomChartData' => $randomChartData,
                 'location' => $location,
                 'search' => '',
-                'locations' => collect(),  //Pour les vues
+                'locations' => collect(),  
             ]);
         }
     }
