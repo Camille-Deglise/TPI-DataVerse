@@ -25,20 +25,24 @@ class ImportController extends Controller
     public function showForm()
     {
         $locationsImport = Location::all();
-        //dd($locationsImport);
+        
         return view('site.import', ['locationsImport' => $locationsImport]);
     }
 
 
     public function process(ImportRequest $request)
     {
-        
+
         // Récupérer les données du formulaire
-        $newLocationName = $request->input('newLocationName');
-        $newLocationZip = $request->input('newLocationZip');
-        $selectedLocationId = $request->input('locationImport');
-        
-        
+    $newLocationName = $request->input('newLocationName');
+    $newLocationZip = $request->input('newLocationZip');
+    $selectedLocationId = $request->input('locationImport');
+
+    // Vérifier si aucun lieu n'est sélectionné ou ajouté
+    if (!$selectedLocationId && (!$newLocationName || !$newLocationZip)) {
+        return redirect()->back()->withErrors('Merci de choisir un lieu dans la liste ou d\'en ajouter un.');
+    }
+
         // Si les champs pour le nouveau lieu sont remplis, créer un nouveau lieu dans la db
         if ($newLocationName && $newLocationZip) {
             $location = Location::create([
@@ -112,7 +116,6 @@ class ImportController extends Controller
         return redirect()->back()->withErrors('Veuillez sélectionner un fichier de format CSV.');
     }
     
-
 
     public function reimport(Request $request, $id)
     {

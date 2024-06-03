@@ -49,6 +49,7 @@ class LoginController extends Controller
      * Valides 
      */
     public function doLogin(LoginRequest $request) {
+        
         // Vérification des données avec méthode validated et enregistrement dans une variable
         $credentials = $request->validated();
     

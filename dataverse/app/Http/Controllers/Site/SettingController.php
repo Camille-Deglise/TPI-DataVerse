@@ -76,23 +76,23 @@ class SettingController extends Controller
     }
 
     public function deactivateAccount(Request $request, $id)
-{
-    $user = User::find($id);
+    {
+        $user = User::find($id);
 
-    if ($user) {
-        $user->is_activ = false; // Assurez-vous que c'est bien `is_active` et pas `is_activ`
-        $user->save();
+        if ($user) {
+            $user->is_activ = false; // Assurez-vous que c'est bien `is_active` et pas `is_activ`
+            $user->save();
 
-        // Déconnexion de l'utilisateur
-        auth()->logout();
+            // Déconnexion de l'utilisateur
+            auth()->logout();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
-        return redirect()->route('login')->with('success', 'Votre compte a bien été désactivé.');
+            return redirect()->route('login')->with('success', 'Votre compte a bien été désactivé.');
+        }
+
+        return redirect()->back()->with('error', 'Une erreur est survenue lors de la désactivation du compte.');
     }
-
-    return redirect()->back()->with('error', 'Une erreur est survenue lors de la désactivation du compte.');
-}
 
 }

@@ -10,7 +10,7 @@
         <ul>
             @foreach($users as $user)
                 <li class="text-gray-700 text-justify list-disc hover:bg-cyan-600 hover:text-gray-200 hover:font-semibold rounded-md">
-                    <a href="{{route('user.setting', ['id'=>$user->id])}}"></a> {{ $user->lastname }} {{ $user->firstname }}</li>
+                    <a href="{{route('user.setting', ['id'=>$user->id])}}">{{ $user->lastname }} {{ $user->firstname }}</a> </li>
             @endforeach
         </ul>
     @else

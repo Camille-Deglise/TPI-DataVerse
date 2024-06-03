@@ -1,6 +1,6 @@
 
 <div class="mt-2 px-4 mr-6 mb-4">
-    <form action="{{ route('combinaison', ['id' => $location->id]) }}" method="POST">
+    <form action="{{ route('combinaison', ['id' => $location->id ?? 0]) }}" method="POST">
         @csrf
         @method('POST')
         <p class="first-letter:text-xl font-bold mb-2 text-center">Choisissez une catégorie</p>

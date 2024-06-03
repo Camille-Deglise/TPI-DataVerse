@@ -130,7 +130,8 @@ class CombinaisonController extends Controller
                 return app(WeatherChartController::class)->tempChart($weatherData);
             case 'humidity':
                 return app(WeatherChartController::class)->humiChart($weatherData);
-
+            default:
+                return new NoChartData('Catégorie invalide');
         }
     }
 
@@ -152,8 +153,7 @@ class CombinaisonController extends Controller
             'availableMonths' => WeatherData::where('location_id', $location->id)->selectRaw('MONTH(statement_date) as month')->distinct()->pluck('month')->sort()->toArray(),
             'search' => '',
             'locations' => collect(),
+            'noChartData' => $chartData instanceof NoChartData ? $chartData : null
         ]);
     }
-
-    
 }

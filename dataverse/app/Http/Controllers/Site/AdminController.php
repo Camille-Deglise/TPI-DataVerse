@@ -41,6 +41,10 @@ class AdminController extends Controller
             'users' => $users]);
     }
 
+    /**
+     * Méthode affichant la page du contributeur pour l'administrateur
+     * Retourne une vue
+     */
     public function userSetting($id)
     {
         $user = User::find($id);

@@ -97,14 +97,16 @@ class HomeController extends Controller
     {
         //Récupération de l'ID de l'utilisateur 
         //$SweatherDatas est utilisé lors du return sur la page home-auth
-        $user = auth()->user();
-        $userId = $user->id;
         
-        $weatherDatas = WeatherData::where('user_id', $userId)
+        if($user = auth()->user())
+        {
+            $userId = $user->id;
+            $weatherDatas = WeatherData::where('user_id', $userId)
             ->orderBy('imported_at', 'desc')
             ->join('locations', 'weather_datas.location_id', '=', 'locations.id')
             ->limit(5)
             ->get(['weather_datas.*', 'locations.name']);
+        }
         
         //Reprise de la recherche dans query 
         $query = $request->input('search');
@@ -146,7 +148,7 @@ class HomeController extends Controller
                                 : [],
             ]);
             //Si la recherche provient d'une des vues home
-        } else {
+        } elseif ($user) {
             return view($view, [
                 'randomChartData' => $randomChartData,
                 'weatherDatas' => $weatherDatas,
@@ -155,7 +157,14 @@ class HomeController extends Controller
                 'locations' => $locations,
             ]);
         }
+        else{
+            return view($view, [
+                'randomChartData' => $randomChartData,
+                'location' => $location,
+                'search' => $query,
+                'locations' => $locations,
+            ]);
+        }
     }
-    
     
 }

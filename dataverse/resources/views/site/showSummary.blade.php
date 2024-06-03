@@ -15,8 +15,9 @@
             <li>Vent {{$weatherData->wind}} km/h</li>
             <li>Date du relevé {{$weatherData->statement_date}}</li>
         </ul>
-        
-    Ré-importer un autre fichier pour ce lieu
+    <br>
+    
+    <p class="first-letter:text-xl font-semibold mb-2">Ré-importer un autre fichier pour ce lieu</p>
     <form action="{{route('reimport', ['id' => $weatherData->id])}}" method="POST" class="mt-10 mb-10" enctype="multipart/form-data">
         @csrf
         @method('POST')
