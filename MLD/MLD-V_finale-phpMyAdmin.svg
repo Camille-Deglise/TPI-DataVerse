@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg
+PUBLIC "-//W3C//DTD SVG 1.1//EN"
+       "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg viewBox="-15 -15 1042 533" width="1057px" height="548px" xmlns="http://www.w3.org/2000/svg" version="1.1">
+   <line x1="554" y1="483" x2="544" y2="483" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="518" y1="428" x2="508" y2="428" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="544" y1="483" x2="518" y2="428" style="stroke:#0bf;stroke-width:1;"/>
+   <line x1="546.5" y1="483" x2="550.03553390593" y2="486.53553390593" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="546.5" y1="483" x2="550.03553390593" y2="479.46446609407" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="513" y1="428" x2="516.53553390593" y2="431.53553390593" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="513" y1="428" x2="516.53553390593" y2="424.46446609407" style="stroke:#0bf;stroke-width:2;"/>
+   <line x1="732" y1="463" x2="742" y2="463" style="stroke:#0b0;stroke-width:1;"/>
+   <line x1="839" y1="280" x2="849" y2="280" style="stroke:#0b0;stroke-width:1;"/>
+   <line x1="742" y1="463" x2="839" y2="280" style="stroke:#0b0;stroke-width:1;"/>
+   <line x1="739.5" y1="463" x2="735.96446609407" y2="466.53553390593" style="stroke:#0b0;stroke-width:2;"/>
+   <line x1="739.5" y1="463" x2="735.96446609407" y2="459.46446609407" style="stroke:#0b0;stroke-width:2;"/>
+   <line x1="844" y1="280" x2="840.46446609407" y2="283.53553390593" style="stroke:#0b0;stroke-width:2;"/>
+   <line x1="844" y1="280" x2="840.46446609407" y2="276.46446609407" style="stroke:#0b0;stroke-width:2;"/>
+   <rect width="178" height="20" x="0" y="18" style="fill:#007;stroke:black;"/>
+   <text width="178" height="20" x="5" y="32" style="fill:#fff;" font-family="Arial" font-size="16px"> failed_jobs</text>
+   <rect width="178" height="20" x="0" y="38" style="fill:#aea;stroke:black;"/>
+   <text width="178" height="20" x="5" y="52" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+   <rect width="178" height="20" x="0" y="58" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="72" style="fill:black;" font-family="Arial" font-size="16px">uuid</text>
+   <rect width="178" height="20" x="0" y="78" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="92" style="fill:black;" font-family="Arial" font-size="16px">connection</text>
+   <rect width="178" height="20" x="0" y="98" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="112" style="fill:black;" font-family="Arial" font-size="16px">queue</text>
+   <rect width="178" height="20" x="0" y="118" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="132" style="fill:black;" font-family="Arial" font-size="16px">payload</text>
+   <rect width="178" height="20" x="0" y="138" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="152" style="fill:black;" font-family="Arial" font-size="16px">exception</text>
+   <rect width="178" height="20" x="0" y="158" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="172" style="fill:black;" font-family="Arial" font-size="16px">failed_at</text>
+   <rect width="178" height="20" x="330" y="398" style="fill:#007;stroke:black;"/>
+   <text width="178" height="20" x="335" y="412" style="fill:#fff;" font-family="Arial" font-size="16px"> locations</text>
+   <rect width="178" height="20" x="330" y="418" style="fill:#aea;stroke:black;"/>
+   <text width="178" height="20" x="335" y="432" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+   <rect width="178" height="20" x="330" y="438" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="335" y="452" style="fill:black;" font-family="Arial" font-size="16px">name</text>
+   <rect width="178" height="20" x="330" y="458" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="335" y="472" style="fill:black;" font-family="Arial" font-size="16px">zipcode</text>
+   <rect width="178" height="20" x="330" y="478" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="335" y="492" style="fill:black;" font-family="Arial" font-size="16px">created_at</text>
+   <rect width="178" height="20" x="330" y="498" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="335" y="512" style="fill:black;" font-family="Arial" font-size="16px">updated_at</text>
+   <rect width="178" height="20" x="52" y="12" style="fill:#007;stroke:black;"/>
+   <text width="178" height="20" x="57" y="26" style="fill:#fff;" font-family="Arial" font-size="16px"> migrations</text>
+   <rect width="178" height="20" x="52" y="32" style="fill:#aea;stroke:black;"/>
+   <text width="178" height="20" x="57" y="46" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+   <rect width="178" height="20" x="52" y="52" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="57" y="66" style="fill:black;" font-family="Arial" font-size="16px">migration</text>
+   <rect width="178" height="20" x="52" y="72" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="57" y="86" style="fill:black;" font-family="Arial" font-size="16px">batch</text>
+   <rect width="178" height="20" x="48" y="0" style="fill:#007;stroke:black;"/>
+   <text width="178" height="20" x="53" y="14" style="fill:#fff;" font-family="Arial" font-size="16px"> password_reset_tokens</text>
+   <rect width="178" height="20" x="48" y="20" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="53" y="34" style="fill:black;" font-family="Arial" font-size="16px">email</text>
+   <rect width="178" height="20" x="48" y="40" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="53" y="54" style="fill:black;" font-family="Arial" font-size="16px">token</text>
+   <rect width="178" height="20" x="48" y="60" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="53" y="74" style="fill:black;" font-family="Arial" font-size="16px">created_at</text>
+   <rect width="178" height="20" x="0" y="1" style="fill:#007;stroke:black;"/>
+   <text width="178" height="20" x="5" y="15" style="fill:#fff;" font-family="Arial" font-size="16px"> personal_access_tokens</text>
+   <rect width="178" height="20" x="0" y="21" style="fill:#aea;stroke:black;"/>
+   <text width="178" height="20" x="5" y="35" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+   <rect width="178" height="20" x="0" y="41" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="55" style="fill:black;" font-family="Arial" font-size="16px">tokenable_type</text>
+   <rect width="178" height="20" x="0" y="61" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="75" style="fill:black;" font-family="Arial" font-size="16px">tokenable_id</text>
+   <rect width="178" height="20" x="0" y="81" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="95" style="fill:black;" font-family="Arial" font-size="16px">name</text>
+   <rect width="178" height="20" x="0" y="101" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="115" style="fill:black;" font-family="Arial" font-size="16px">token</text>
+   <rect width="178" height="20" x="0" y="121" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="135" style="fill:black;" font-family="Arial" font-size="16px">abilities</text>
+   <rect width="178" height="20" x="0" y="141" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="155" style="fill:black;" font-family="Arial" font-size="16px">last_used_at</text>
+   <rect width="178" height="20" x="0" y="161" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="175" style="fill:black;" font-family="Arial" font-size="16px">expires_at</text>
+   <rect width="178" height="20" x="0" y="181" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="195" style="fill:black;" font-family="Arial" font-size="16px">created_at</text>
+   <rect width="178" height="20" x="0" y="201" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="5" y="215" style="fill:black;" font-family="Arial" font-size="16px">updated_at</text>
+   <rect width="178" height="20" x="849" y="250" style="fill:#007;stroke:black;"/>
+   <text width="178" height="20" x="854" y="264" style="fill:#fff;" font-family="Arial" font-size="16px"> users</text>
+   <rect width="178" height="20" x="849" y="270" style="fill:#aea;stroke:black;"/>
+   <text width="178" height="20" x="854" y="284" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+   <rect width="178" height="20" x="849" y="290" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="854" y="304" style="fill:black;" font-family="Arial" font-size="16px">lastname</text>
+   <rect width="178" height="20" x="849" y="310" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="854" y="324" style="fill:black;" font-family="Arial" font-size="16px">firstname</text>
+   <rect width="178" height="20" x="849" y="330" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="854" y="344" style="fill:black;" font-family="Arial" font-size="16px">email</text>
+   <rect width="178" height="20" x="849" y="350" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="854" y="364" style="fill:black;" font-family="Arial" font-size="16px">email_verified_at</text>
+   <rect width="178" height="20" x="849" y="370" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="854" y="384" style="fill:black;" font-family="Arial" font-size="16px">password</text>
+   <rect width="178" height="20" x="849" y="390" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="854" y="404" style="fill:black;" font-family="Arial" font-size="16px">is_admin</text>
+   <rect width="178" height="20" x="849" y="410" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="854" y="424" style="fill:black;" font-family="Arial" font-size="16px">is_activ</text>
+   <rect width="178" height="20" x="849" y="430" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="854" y="444" style="fill:black;" font-family="Arial" font-size="16px">remember_token</text>
+   <rect width="178" height="20" x="849" y="450" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="854" y="464" style="fill:black;" font-family="Arial" font-size="16px">created_at</text>
+   <rect width="178" height="20" x="849" y="470" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="854" y="484" style="fill:black;" font-family="Arial" font-size="16px">updated_at</text>
+   <rect width="178" height="20" x="554" y="213" style="fill:#007;stroke:black;"/>
+   <text width="178" height="20" x="559" y="227" style="fill:#fff;" font-family="Arial" font-size="16px"> weather_datas</text>
+   <rect width="178" height="20" x="554" y="233" style="fill:#aea;stroke:black;"/>
+   <text width="178" height="20" x="559" y="247" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+   <rect width="178" height="20" x="554" y="253" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="559" y="267" style="fill:black;" font-family="Arial" font-size="16px">precipitation</text>
+   <rect width="178" height="20" x="554" y="273" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="559" y="287" style="fill:black;" font-family="Arial" font-size="16px">sunshine</text>
+   <rect width="178" height="20" x="554" y="293" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="559" y="307" style="fill:black;" font-family="Arial" font-size="16px">snow</text>
+   <rect width="178" height="20" x="554" y="313" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="559" y="327" style="fill:black;" font-family="Arial" font-size="16px">temperature</text>
+   <rect width="178" height="20" x="554" y="333" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="559" y="347" style="fill:black;" font-family="Arial" font-size="16px">humidity</text>
+   <rect width="178" height="20" x="554" y="353" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="559" y="367" style="fill:black;" font-family="Arial" font-size="16px">wind</text>
+   <rect width="178" height="20" x="554" y="373" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="559" y="387" style="fill:black;" font-family="Arial" font-size="16px">statement_date</text>
+   <rect width="178" height="20" x="554" y="393" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="559" y="407" style="fill:black;" font-family="Arial" font-size="16px">imported_at</text>
+   <rect width="178" height="20" x="554" y="413" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="559" y="427" style="fill:black;" font-family="Arial" font-size="16px">created_at</text>
+   <rect width="178" height="20" x="554" y="433" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="559" y="447" style="fill:black;" font-family="Arial" font-size="16px">updated_at</text>
+   <rect width="178" height="20" x="554" y="453" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="559" y="467" style="fill:black;" font-family="Arial" font-size="16px">user_id</text>
+   <rect width="178" height="20" x="554" y="473" style="fill:none;stroke:black;"/>
+   <text width="178" height="20" x="559" y="487" style="fill:black;" font-family="Arial" font-size="16px">location_id</text>
+</svg>
