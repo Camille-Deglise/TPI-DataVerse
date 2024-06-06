@@ -128,6 +128,7 @@ Route::post('/import', [ImportController::class, 'process'])->name('import.proce
 Route::post('/reimport/{id}', [ImportController::class, 'reimport'])->name('reimport');
 
 /*-------------------------------Routes pour l'administrateur ----------------------------------- */
+Route::get('/admin/allDatas', [AdminController::class, 'allDatas'])->name('admin.setData');
 Route::get('/admin', [AdminController::class, 'searchUsers'])->name('admin.search');
 Route::get('/admin/{id}', [AdminController::class, 'userSetting'])->name('user.setting');
 Route::post('/admin/deactivate/{id}', [AdminController::class, 'deactivateUser'])->name('deactivate.user');

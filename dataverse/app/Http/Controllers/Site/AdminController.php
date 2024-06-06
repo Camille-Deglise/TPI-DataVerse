@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\WeatherData;
 use Illuminate\Support\Facades\Password;
 //------------------------------
 // ETML - TPI
@@ -99,5 +100,17 @@ class AdminController extends Controller
         return $status === Password::RESET_LINK_SENT
         ?redirect()->route('user.setting', ['id' => $user->id])->with('success', 'Lien envoyé à l\'utilisateur')
         :redirect()->route('user.setting', ['id' => $user->id])->withErrors(['email' => __($status)]);
+    }
+
+    /**
+     * Méthode de gestion de toutes les données
+     * Retourn la vue de gestion
+     */
+
+    public function allDatas()
+    {
+        $allDatas = WeatherData::all();
+        
+        return view('admin.settingDatas', ['allDatas' =>$allDatas]);
     }
 }
