@@ -5,7 +5,6 @@
 @section('content')
 
 <div class="inline-flex space-x-8 mb-10">
-    <!-- Liste des données gérées -->
     <div class="shadow-lg h-96 w-96 ">
         <div class=" overflow-auto h-96 w-auto border-2 border-cyan-600 border-solid rounded-md mx-8 " >
             <h1 class="text-gray-700 text-center text-xl first-letter:text-2xl mt-4">Liste des données</h1>
@@ -21,6 +20,5 @@
             @endforeach
         </div>
     </div>    
-   
 </div>
 @endsection

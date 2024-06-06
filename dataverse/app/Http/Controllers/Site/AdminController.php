@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Location;
 use App\Models\WeatherData;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
 //------------------------------
 // ETML - TPI
@@ -110,7 +111,10 @@ class AdminController extends Controller
     public function allDatas()
     {
         $allDatas = WeatherData::all();
+        $allLocations = Location::all();
+        $allUsers = User::all();
         
-        return view('admin.settingDatas', ['allDatas' =>$allDatas]);
+        
+        return view('admin.settingDatas', ['allDatas' =>$allDatas, 'allLocations' => $allLocations, 'allUsers' => $allUsers]);
     }
 }
