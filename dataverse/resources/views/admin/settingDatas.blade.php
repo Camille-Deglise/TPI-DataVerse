@@ -4,21 +4,34 @@
 
 @section('content')
 
-<div class="inline-flex space-x-8 mb-10">
-    <div class="shadow-lg h-96 w-96 ">
-        <div class=" overflow-auto h-96 w-auto border-2 border-cyan-600 border-solid rounded-md mx-8 " >
-            <h1 class="text-gray-700 text-center text-xl first-letter:text-2xl mt-4">Liste des données</h1>
-            @foreach($allDatas as $data)
-                <div class=" mt-2 mx-6 mb-4 font-cali">
-                    <p class="first-letter:text-lg">Date d'import: {{ $data->imported_at}}</p>
-                    <p class="first-letter:text-lg">Lieu : {{$data->name}}</p> 
-                    {{-- <p class="first-letter:text-lg">Utilisaeur : {{$data->user->lastname}} {{$data->user->firstname}}</p> --}}
-                    <a href="#">
-                        <button class="hover:bg-cyan-700 hover:text-gray-200 hover:font-bold border-2 border-gray-200 rounded-s-md px-2" type="button">Résumé des données</button>
-                    </a>
-                </div>
+
+<form action="">
+    <div class="mb-6 flex items-center">
+        <label class="block text-gray-500 font-bold mr-4" for="locations" style="min-width: 100px;">
+            Lieux 
+        </label>
+        <select id="locations" name="locations" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-grey-500">
+            <option value="" disabled selected>Lieux disponibles</option>
+            @foreach($allLocations as $location)
+            <option value="{{ $location->id }}">
+                {{ $location->name }} {{$location->zipcode}}
+            </option>
             @endforeach
-        </div>
-    </div>    
-</div>
+        </select>
+    </div>
+
+    <div class="mb-6 flex items-center">
+        <label class="block text-gray-500 font-bold mr-4" for="locations" style="min-width: 100px;">
+            Utilisateurs
+        </label>
+        <select id="users" name="users" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-grey-500">
+            <option value="" disabled selected>Utilisateurs ayant importés des données</option>
+            @foreach($allUsers as $user)
+            <option value="{{ $user->id }}">
+                {{ $user->lastname }} {{$user->firstname}}
+            </option>
+            @endforeach
+        </select>
+    </div>
+</form>
 @endsection

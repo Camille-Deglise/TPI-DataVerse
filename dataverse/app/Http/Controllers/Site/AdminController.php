@@ -112,7 +112,8 @@ class AdminController extends Controller
     {
         $allDatas = WeatherData::all();
         $allLocations = Location::all();
-        $allUsers = User::all();
+        $allUsers = User::where('');
+        
         
         
         return view('admin.settingDatas', ['allDatas' =>$allDatas, 'allLocations' => $allLocations, 'allUsers' => $allUsers]);
